@@ -18,6 +18,7 @@ export const getUserByEmail = async (
   };
 
   const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+  console.log("Data: ", data, " Err: ", error);
 
   return {
     data,

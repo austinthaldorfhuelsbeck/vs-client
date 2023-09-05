@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { CallbackPage } from "./pages/callback-page";
 import { LandingPage } from "./pages/landing-page";
 import { NotFoundPage } from "./pages/not-found-page";
-import { ProfilePage } from "./components/gallery";
+import { Gallery } from "./components/gallery";
 
 export const App: React.FC = () => {
   const { isLoading } = useAuth0();
@@ -23,7 +23,7 @@ export const App: React.FC = () => {
       <Route path="/" element={<LandingPage />} />
       <Route
         path="/gallery"
-        element={<AuthenticationGuard component={ProfilePage} />}
+        element={<AuthenticationGuard component={Gallery} />}
       />
       <Route path="/callback" element={<CallbackPage />} />
       <Route path="*" element={<NotFoundPage />} />

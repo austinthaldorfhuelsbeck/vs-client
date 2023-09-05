@@ -1,9 +1,12 @@
+import { Company } from "./company";
+
 export interface UserProfile {
-  nickname: string;
+  user_id: number;
   name: string;
-  picture: string;
-  updated_at: string;
   email: string;
-  email_verified: boolean;
-  sub: string;
+  is_dark_mode: boolean;
+  picture: string;
+  created_date: string;
+  updated_date: string;
+  companies: Array<Company>;
 }

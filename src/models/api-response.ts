@@ -1,7 +1,7 @@
 import { AppError } from "./app-error";
-import { Message } from "./message";
+import { UserProfile } from "./user-profile";
 
 export interface ApiResponse {
-  data: Message | null;
+  data: UserProfile | null;
   error: AppError | null;
 }
