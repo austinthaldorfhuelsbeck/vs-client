@@ -1,3 +1,5 @@
+import { Folder } from "./folder";
+
 export interface Company {
   company_id: number;
   user_id: number;
@@ -15,4 +17,5 @@ export interface Company {
   hex3: string;
   created_date: Date;
   updated_date: Date;
-}
+  folders: Array<Folder>;
+};

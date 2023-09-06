@@ -1,0 +1,27 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiResponse } from "../models/api-response";
+import { callExternalApi } from "./external-api.service";
+
+const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
+
+export const getCompany = async (
+  accessToken: string,
+  id: number,
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/companies/${id}`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+  console.log("Data: ", data, " Err: ", error);
+
+  return {
+    data,
+    error,
+  };
+};
