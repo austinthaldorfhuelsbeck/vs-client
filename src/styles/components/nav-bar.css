@@ -46,7 +46,8 @@
 }
 
 .nav-bar__logo {
-  height: 3.2rem;
+  color: white;
+  margin-top: 1.6rem;
 }
 
 .nav-bar__tabs {
@@ -59,12 +60,12 @@
 .nav-bar__tab {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-
+  justify-content: left;
+  cursor: pointer;
   margin-right: 24px;
-
   font-weight: 500;
-  font-size: 16px;
+  color: rgb(206, 206, 206);
+  font-size: 14px;
   line-height: 16px;
 }
 
