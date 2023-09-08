@@ -15,12 +15,6 @@
 .content-block-layout__galleries {
   display: grid;
   width: 100%;
-  /* width: 68vw;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  grid-auto-rows: minmax(100px, auto); */
-  /* grid-template-columns: 35rem; */
-  /* width: 5rem; */
 }
 
 .content-block__title {

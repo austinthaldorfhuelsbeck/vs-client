@@ -1,24 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Folder } from "src/models/folder";
 import { Gallery } from "src/models/gallery";
 import { FolderLayoutListItem } from "../selectors/folder-layout-li";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { InlineButton } from "../buttons/inline-button";
 import { StudioModal } from "../modals/studio-modal";
+import { useAuth0 } from "@auth0/auth0-react";
+import { ApiResponse } from "src/models/api-response";
+import { getFolder } from "src/services/folders.service";
+import { NewGalleryForm } from "../forms/new-gallery-form";
 
 interface Props {
-  galleries: Array<Gallery | null>;
   selectedFolder: Folder | null;
 };
 
 export const FolderLayout: React.FC<Props> = ({
-  galleries,
   selectedFolder
 }) => {
-  // state for modal new gallery form
+  const { getAccessTokenSilently } = useAuth0();
+  
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [galleries, setGalleries] = useState<Array<Gallery | null>>([]);
 
-  return (
+  // Load galleries from selectedFolder
+  useEffect(() => {
+    const getFolderResponse = async (id: number) => {
+      const audienceURL = process.env.REACT_APP_AUTH0_AUDIENCE;
+
+      try {
+        const accessToken = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: audienceURL,
+            scope: "read:current_user"
+          }
+        });
+
+        const folderResponse: ApiResponse = await getFolder(accessToken, id);
+
+        setGalleries(folderResponse.data.galleries);
+      } catch (error: any) {
+        console.log(error);
+      };
+    };
+
+    if (selectedFolder) getFolderResponse(selectedFolder.folder_id);
+  }, [getAccessTokenSilently, selectedFolder])
+
+  return selectedFolder && (
     <div className="content-block-layout__galleries">
       <div className="content-block__container">
         <h4 className="content-block__title">{selectedFolder?.folder_name}</h4>
@@ -31,13 +59,16 @@ export const FolderLayout: React.FC<Props> = ({
           isOpen={modalIsOpen}
           onClose={() => setModalIsOpen(false)}
         >
-          <p>
-            New gallery!
-          </p>
+          <NewGalleryForm
+            folder_id={selectedFolder.folder_id}
+            onClose={() => setModalIsOpen(false)}
+            galleries={galleries}
+            setGalleries={setGalleries}
+          />
         </StudioModal>
       </div>
       <ul>
-        {galleries?.map((gallery: Gallery | null) => gallery && (
+        {galleries.map((gallery: Gallery | null) => gallery && (
             <FolderLayoutListItem
               key={gallery.gallery_id}
               gallery={gallery}

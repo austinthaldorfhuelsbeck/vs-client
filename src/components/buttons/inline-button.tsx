@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 type Props = {
-  onClick: React.MouseEventHandler;
+  onClick: (e: any) => any;
   icon: IconDefinition | null;
   title: string;
 };
