@@ -15,7 +15,7 @@ export interface Company {
   hex1: string;
   hex2: string;
   hex3: string;
-  created_date: Date;
-  updated_date: Date;
+  created_at: Date;
+  updated_at: Date;
   folders: Array<Folder>;
 };

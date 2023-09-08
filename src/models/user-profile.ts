@@ -6,7 +6,7 @@ export interface UserProfile {
   email: string;
   is_dark_mode: boolean;
   picture: string;
-  created_date: string;
-  updated_date: string;
+  created_at: string;
+  updated_at: string;
   companies: Array<Company>;
 }

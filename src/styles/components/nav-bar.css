@@ -21,7 +21,7 @@
   /* responsive */
 
   height: 80px;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 
   padding: 0 24px;
   margin: 0;
@@ -36,6 +36,11 @@
   /* responsive */
 
   margin-right: 64px;
+}
+
+.nav-bar__profile-img {
+  width: 50px;
+  border-radius: 100%;
 }
 
 .nav-bar__link {

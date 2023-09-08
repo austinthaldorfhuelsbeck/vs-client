@@ -1,14 +1,21 @@
+// Dependencies
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState, useEffect } from "react";
-import { PageLayout } from "./page-layout";
+// Models
 import { UserProfile } from "src/models/user-profile";
-import { getUserByEmail } from "src/services/users.service";
-import { CompaniesSelector } from "./selectors/companies-selector";
 import { Company } from "src/models/company";
-import { FoldersSelector } from "./selectors/folders-selector";
 import { Folder } from "src/models/folder";
+import { Gallery } from "src/models/gallery";
+// API Services
 import { ApiResponse } from "src/models/api-response";
+import { getUserByEmail } from "src/services/users.service";
 import { getCompany } from "src/services/companies.service";
+import { getFolder } from "src/services/folders.service";
+// Components
+import { PageLayout } from "../page-layout";
+import { CompaniesSelector } from "../selectors/companies-selector";
+import { FoldersSelector } from "../selectors/folders-selector";
+import { FolderLayout } from "./folder-layout";
 
 export const Studio: React.FC = () => {
   const { user, getAccessTokenSilently } = useAuth0();
@@ -16,16 +23,17 @@ export const Studio: React.FC = () => {
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
   const [folders, setFolders] = useState<Array<Folder | null>>([]);
   const [selectedFolder, setSelectedFolder] = useState<Folder | null>(null);
+  const [galleries, setGalleries] = useState<Array<Gallery | null>>([]);
 
   // Load Auth0 user into state with metadata from db
   useEffect(() => {
     const getUserProfileResponse = async (email: string) => {
-      const audienceUrl = process.env.REACT_APP_AUTH0_AUDIENCE;
+      const audienceURL = process.env.REACT_APP_AUTH0_AUDIENCE;
 
       try {
         const accessToken = await getAccessTokenSilently({
           authorizationParams: {
-            audience: audienceUrl,
+            audience: audienceURL,
             scope: "read:current_user"
           }
         });
@@ -51,19 +59,19 @@ export const Studio: React.FC = () => {
   // Load folders from selectedCompany
   useEffect(() => {
     const getCompanyResponse = async (id: number) => {
-      const audienceUrl = process.env.REACT_APP_AUTH0_AUDIENCE;
+      const audienceURL = process.env.REACT_APP_AUTH0_AUDIENCE;
 
       try {
         const accessToken = await getAccessTokenSilently({
           authorizationParams: {
-            audience: audienceUrl,
+            audience: audienceURL,
             scope: "read:current_user"
           }
         });
 
-        const selectedCompanyResponse: ApiResponse = await getCompany(accessToken, id);
+        const companyResponse: ApiResponse =  await getCompany(accessToken, id);
 
-        setFolders(selectedCompanyResponse.data.folders);
+        setFolders(companyResponse.data.folders);
       } catch (error: any) {
         console.log(error);
       };
@@ -79,6 +87,29 @@ export const Studio: React.FC = () => {
     };
   }, [folders]);
 
+  // Load galleries from selectedFolder
+  useEffect(() => {
+    const getFolderResponse = async (id: number) => {
+      const audienceURL = process.env.REACT_APP_AUTH0_AUDIENCE;
+
+      try {
+        const accessToken = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: audienceURL,
+            scope: "read:current_user"
+          }
+        });
+
+        const folderResponse: ApiResponse = await getFolder(accessToken, id);
+
+        setGalleries(folderResponse.data.galleries);
+      } catch (error: any) {
+        console.log(error);
+      };
+    };
+
+    if (selectedFolder) getFolderResponse(selectedFolder.folder_id);
+  }, [getAccessTokenSilently, selectedFolder])
 
   return (
       <PageLayout>
@@ -96,7 +127,10 @@ export const Studio: React.FC = () => {
               selectedFolder={selectedFolder}
               setSelectedFolder={setSelectedFolder}
             />
-            Galleries
+            <FolderLayout
+              galleries={galleries}
+              selectedFolder={selectedFolder}
+            />
           </div>
         </div>
       </PageLayout>

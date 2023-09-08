@@ -16,8 +16,8 @@ export const CompaniesSelector: React.FC<Props> = ({
 }) => {
   return (
     <ul className="nav-bar__tabs">
-      {userProfile && selectedCompany && setSelectedCompany ? 
-        userProfile.companies.map((company: Company) => (
+      {selectedCompany && setSelectedCompany ? 
+        userProfile?.companies.map((company: Company) => (
           <CompaniesSelectorListItem
             key={company.company_id}
             company={company}

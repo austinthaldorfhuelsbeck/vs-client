@@ -4,12 +4,12 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerURL = process.env.REACT_APP_API_SERVER_URL;
 
-export const getCompany = async (
+export const getFolder = async (
   accessToken: string,
   id: number,
 ): Promise<ApiResponse> => {
   const config: AxiosRequestConfig = {
-    url: `${apiServerURL}/companies/${id}`,
+    url: `${apiServerURL}/folders/${id}`,
     method: "GET",
     headers: {
       "content-type": "application/json",

@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { CallbackPage } from "./pages/callback-page";
 import { LandingPage } from "./pages/landing-page";
 import { NotFoundPage } from "./pages/not-found-page";
-import { Studio } from "./components/studio";
+import { Studio } from "./components/layouts/studio";
 
 export const App: React.FC = () => {
   const { isLoading } = useAuth0();

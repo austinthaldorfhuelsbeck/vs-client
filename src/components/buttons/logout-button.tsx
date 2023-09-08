@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 
 export const LogoutButton: React.FC = () => {
-  const { logout } = useAuth0();
+  const { user, logout } = useAuth0();
 
   const handleLogout = () => {
     logout({
@@ -13,8 +13,11 @@ export const LogoutButton: React.FC = () => {
   };
 
   return (
-    <button className="button__logout" onClick={handleLogout}>
-      Log Out
-    </button>
+    <img
+      className="nav-bar__profile-img"
+      src={user?.picture}
+      alt={user?.name}
+      onClick={handleLogout}
+    />
   );
 };
