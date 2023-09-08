@@ -1,8 +1,9 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Dispatch, SetStateAction, MouseEvent, useState } from "react";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { Folder } from "src/models/folder";
 import { FoldersSelectorListItem } from "./folders-selector-li";
+import { InlineButton } from "../buttons/inline-button";
+import { StudioModal } from "../modals/studio-modal";
 
 interface Props {
   folders: Array<Folder | null>;
@@ -15,7 +16,10 @@ export const FoldersSelector: React.FC<Props> = ({
   selectedFolder,
   setSelectedFolder
 }) => {
+  // state for modal new folder form
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
+  // map folders to list items
   const listFolders = (folders: Array<Folder | null>) => {
     return (
       folders?.map(
@@ -37,11 +41,19 @@ export const FoldersSelector: React.FC<Props> = ({
   return (
     <div className="content-block-layout__folders">
       <h4 className="content-block__title">Folders</h4>
-      <button className="button">
-        <FontAwesomeIcon icon={faFolderPlus} />
-        &nbsp;
-        New Folder
-      </button>
+      <InlineButton
+        onClick={() => setModalIsOpen(true)}
+        icon={faFolderPlus}
+        title="New Folder"
+      />
+      <StudioModal
+        isOpen={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <p>
+          New folder!
+        </p>
+      </StudioModal>
       <ul>
         {folders[0] && listFolders( folders )}
       </ul>
