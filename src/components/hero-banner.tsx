@@ -1,7 +1,6 @@
 import React from "react";
 
 export const HeroBanner: React.FC = () => {
-  const logo = "https://cdn.auth0.com/blog/developer-hub/react-logo.svg";
 
   return (
     <div className="hero-banner hero-banner--pink-yellow">
@@ -13,7 +12,7 @@ export const HeroBanner: React.FC = () => {
         id="code-sample-link"
         target="_blank"
         rel="noopener noreferrer"
-        href=""
+        href="/"
         className="button button--secondary"
       >
         Check something out →

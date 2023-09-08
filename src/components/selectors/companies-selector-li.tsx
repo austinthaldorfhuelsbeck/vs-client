@@ -6,23 +6,29 @@ import { NavLink } from "react-router-dom";
 
 interface Props {
   company: Company;
-  setCompany: Dispatch<SetStateAction<Company | null>>;
+  selectedCompany: Company | null;
+  setSelectedCompany: Dispatch<SetStateAction<Company | null>>;
 }
 
-export const CompanyTab: React.FC<Props> = ({
+export const CompaniesSelectorListItem: React.FC<Props> = ({
   company,
-  setCompany
+  selectedCompany,
+  setSelectedCompany
 }) => {
   return (
-    <span
-      className="nav-bar__tab"
-      onClick={() => setCompany(company)}
+    <li
+      className={
+        (company.company_id === selectedCompany?.company_id) ?
+        "nav-bar__tab nav-bar__tab--active" :
+        "nav-bar__tab"
+      }
+      onClick={() => setSelectedCompany(company)}
     >
       <span>{company.company_name}</span>
       &nbsp;&nbsp;
       <NavLink to={`/studio/company/${company.company_id}/settings`}>
         <FontAwesomeIcon icon={faGear} />
       </NavLink>
-    </span>
+    </li>
   )
 }

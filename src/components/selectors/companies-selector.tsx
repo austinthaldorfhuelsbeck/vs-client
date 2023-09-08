@@ -1,26 +1,31 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { UserProfile } from "src/models/user-profile";
 import { Company } from "src/models/company";
-import { CompanyTab } from "src/components/tabs/company-tab";
+import { CompaniesSelectorListItem } from "src/components/selectors/companies-selector-li";
 
 interface Props {
   userProfile: UserProfile | null;
-  company: Company | null;
-  setCompany: Dispatch<SetStateAction<Company | null>>;
+  selectedCompany: Company | null;
+  setSelectedCompany: Dispatch<SetStateAction<Company | null>>;
 }
 
 export const CompaniesSelector: React.FC<Props> = ({
   userProfile,
-  company,
-  setCompany
+  selectedCompany,
+  setSelectedCompany
 }) => {
   return (
-    <div className="nav-bar__tabs">
-      {userProfile && company && setCompany ? 
+    <ul className="nav-bar__tabs">
+      {userProfile && selectedCompany && setSelectedCompany ? 
         userProfile.companies.map((company: Company) => (
-          <CompanyTab company={company} setCompany={setCompany} />
+          <CompaniesSelectorListItem
+            key={company.company_id}
+            company={company}
+            selectedCompany={selectedCompany}
+            setSelectedCompany={setSelectedCompany}
+          />
         )) :
         <span>Loading...</span>}
-    </div>
+    </ul>
   );
 };

@@ -67,6 +67,7 @@
   color: rgb(206, 206, 206);
   font-size: 14px;
   line-height: 16px;
+  list-style-type: none;
 }
 
 .nav-bar__tab:last-child {
@@ -77,10 +78,11 @@
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-color: var(--indigo);
+  list-style-type: none;
 
   /* responsive */
 
-  text-decoration-thickness: 4px;
+  text-decoration-thickness: 2px;
   text-underline-offset: 8px;
 }
 
