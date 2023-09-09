@@ -40,7 +40,10 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
     // build the menu
     const listMenu = (items: Array<MenuItem>) => {
         return items.map((item, index) => (
-            <div key={index} onClick={item.action}>
+            <div
+                key={index}
+                onClick={item.action}
+            >
                 <MenuListItem
                     icon={item.icon}
                     title={item.title}

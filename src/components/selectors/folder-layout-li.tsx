@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Gallery } from "src/models/gallery";
+import { GalleryContextMenuButton } from "../buttons/gallery-context-menu-button";
 
 interface Props {
   gallery: Gallery | null;
@@ -20,6 +21,7 @@ export const FolderLayoutListItem: React.FC<Props> = ({ gallery }) => {
           <h6><em>{`Updated - ${String(gallery?.updated_at).slice(0, 10)}`}</em></h6>
         </div>
       </Link>
+      <GalleryContextMenuButton />
     </li>
   )
 }

@@ -100,9 +100,21 @@
 
 .context-menu {
   position: absolute;
-  width: 10rem;
+  min-width: 10rem;
   background-color: rgb(50, 50, 50);
-  
+  border-radius: 0.5rem;
+}
+
+.context-menu__item {
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.context-menu__item:hover {
+  background-color: rgb(73, 73, 73);
+  border-radius: 0.5rem;
 }
 
 #page-description {

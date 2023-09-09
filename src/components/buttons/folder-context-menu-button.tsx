@@ -4,14 +4,14 @@ import React, { MouseEvent, useState } from "react";
 import { ContextMenu } from "../menus/context-menu";
 import { MenuItem } from "src/models/menu-item";
 
-// mouse coordinates for context menu
+// mouse coordinates
 interface Points {
   x: number;
   y: number;
 };
 
 export const FolderContextMenuButton: React.FC = () => {
-	// context menu display state
+	// menu display state
 	const [isContextMenu, setIsContextMenu] = useState<boolean>(false);
 	const [points, setPoints] = useState<Points>({
 		x: 0,

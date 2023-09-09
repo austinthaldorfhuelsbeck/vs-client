@@ -24,7 +24,8 @@
 }
 
 .card:hover {
-  transform: scale(1.04);
+  /* transform: scale(1.04); */
+  background: hsla(0, 0%, 100%, 0.219);
 }
 
 .card__img {
