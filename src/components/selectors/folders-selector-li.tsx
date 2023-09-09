@@ -2,6 +2,7 @@ import { faFolder, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Dispatch, SetStateAction } from "react";
 import { Folder } from "src/models/folder";
+import { FolderContextMenuButton } from "../buttons/folder-context-menu-button";
 
 interface Props {
   folder: Folder | null;
@@ -16,20 +17,22 @@ export const FoldersSelectorListItem: React.FC<Props> = ({
 }) => {
   return (
     <li
-      className={
-        (folder?.folder_id === selectedFolder?.folder_id) ?
-        "content-block__tab content-block__tab--active" :
-        "content-block__tab"
-      }
+      className="content-block__tab"
       onClick={() => setSelectedFolder(folder)}
     >
-      <h5>
-        {(folder?.folder_name === "Uncategorized") ?
-          <FontAwesomeIcon icon={faThLarge} /> :
-          <FontAwesomeIcon icon={faFolder} />}
-        &nbsp;
+      {(folder?.folder_name === "Uncategorized") ?
+        <FontAwesomeIcon icon={faThLarge} /> :
+        <FontAwesomeIcon icon={faFolder} />}
+      <span
+        className={
+          (folder?.folder_id === selectedFolder?.folder_id) ?
+          "content-block__title--active" :
+          "content-block__title"
+        }
+      >
         {folder?.folder_name}
-      </h5>
+      </span>
+      <FolderContextMenuButton />
     </li>
   );
 };

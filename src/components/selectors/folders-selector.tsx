@@ -1,14 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import React, { Dispatch, SetStateAction } from "react";
 import { Folder } from "src/models/folder";
 import { FoldersSelectorListItem } from "./folders-selector-li";
-import { InlineButton } from "../buttons/inline-button";
-import { StudioModal } from "../modals/studio-modal";
-import { Company } from "src/models/company";
-import { NewFolderForm } from "../forms/new-folder-form";
-import { useAuth0 } from "@auth0/auth0-react";
-import { getCompany } from "src/services/companies.service";
-import { ApiResponse } from "src/models/api-response";
 
 interface Props {
   folders: Array<Folder | null>;

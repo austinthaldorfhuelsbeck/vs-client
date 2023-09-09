@@ -57,7 +57,7 @@ export const SidebarLayout: React.FC<Props> = ({
 
     return selectedCompany && (
     <div className="content-block-layout__folders">
-      <h4 className="content-block__title">Folders</h4>
+      <h4 className="content-block__header">Folders</h4>
       <InlineButton
         onClick={() => setModalIsOpen(true)}
         icon={faFolderPlus}

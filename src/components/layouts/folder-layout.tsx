@@ -49,7 +49,7 @@ export const FolderLayout: React.FC<Props> = ({
   return selectedFolder && (
     <div className="content-block-layout__galleries">
       <div className="content-block__container">
-        <h4 className="content-block__title">{selectedFolder?.folder_name}</h4>
+        <h4 className="content-block__header">{selectedFolder?.folder_name}</h4>
         <InlineButton
           onClick={() => setModalIsOpen(true)}
           icon={faPlus}
