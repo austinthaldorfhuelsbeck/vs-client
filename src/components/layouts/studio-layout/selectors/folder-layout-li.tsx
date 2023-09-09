@@ -8,6 +8,18 @@ interface Props {
 }
 
 export const FolderLayoutListItem: React.FC<Props> = ({ gallery }) => {
+  // format date nicely
+  const updatedDate: string = gallery?.updated_at ? (
+      new Date(gallery.updated_at).toLocaleDateString(
+        "en-us",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }
+      )
+   ) : "";
+
   return (
     <li className="card">
       <Link to={`/studio/galleries/${gallery?.gallery_id}`}>
@@ -18,7 +30,7 @@ export const FolderLayoutListItem: React.FC<Props> = ({ gallery }) => {
         />
         <div className="card__headers-container">
           <h4><strong>{gallery?.gallery_name}</strong></h4>
-          <h6><em>{`Updated - ${String(gallery?.updated_at).slice(0, 10)}`}</em></h6>
+          <p>{`Updated - ${updatedDate}`}</p>
         </div>
       </Link>
       <GalleryContextMenuButton />

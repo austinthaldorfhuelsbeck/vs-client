@@ -13,7 +13,7 @@ interface Props {
   setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
 };
 
-export const NewGalleryForm: React.FC<Props> = ({
+export const GalleryForm: React.FC<Props> = ({
   folder_id,
   onClose,
   galleries,
@@ -71,18 +71,17 @@ export const NewGalleryForm: React.FC<Props> = ({
         name="gallery_name"
         title="New Gallery"
         placeholder="Gallery Name"
+        maxLength={40}
         onChange={onChange}
         value={formData.gallery_name}
       />
-      <p>
-        Gallery name is not visible to clients.
-      </p>
-      <br />
-      <InlineButton
-        onClick={onSubmit}
-        icon={null}
-        title="Create Gallery"
-      />
+      <div className="form-content__actions">
+        <InlineButton
+          onClick={onSubmit}
+          icon={null}
+          title="Create Gallery"
+        />
+      </div>
     </form>
   )
 };

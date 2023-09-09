@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Folder } from "src/models/folder";
 import { Gallery } from "src/models/gallery";
-import { FolderLayoutListItem } from "../selectors/folder-layout-li";
+import { FolderLayoutListItem } from "./selectors/folder-layout-li";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { InlineButton } from "../buttons/inline-button";
-import { StudioModal } from "../modals/studio-modal";
+import { InlineButton } from "../../buttons/inline-button";
+import { StudioModal } from "../../modals/studio-modal";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ApiResponse } from "src/models/api-response";
 import { getFolder } from "src/services/folders.service";
-import { NewGalleryForm } from "../forms/new-gallery-form";
+import { GalleryForm } from "../../forms/gallery-form";
 
 interface Props {
   selectedFolder: Folder | null;
@@ -57,9 +57,9 @@ export const FolderLayout: React.FC<Props> = ({
         />
         <StudioModal
           isOpen={modalIsOpen}
-          onClose={() => setModalIsOpen(false)}
+          closeModal={() => setModalIsOpen(false)}
         >
-          <NewGalleryForm
+          <GalleryForm
             folder_id={selectedFolder.folder_id}
             onClose={() => setModalIsOpen(false)}
             galleries={galleries}

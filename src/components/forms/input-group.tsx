@@ -5,8 +5,9 @@ interface Props {
   name: string;
   title: string;
   placeholder: string;
+  maxLength: number;
   onChange: (e: any) => any;
-  value: any;
+  value: string;
 };
 
 export const InputGroup: React.FC<Props> = ({
@@ -14,22 +15,32 @@ export const InputGroup: React.FC<Props> = ({
   name,
   title,
   placeholder,
+  maxLength,
   onChange,
   value
 }) => {
   return (
-    <div className="">
+    <div className="form-content">
       <label htmlFor={name}>
         <h3>{title}</h3>
       </label>
-      <input
-        className=""
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        onChange={onChange}
-        value={value}
-      />
+      <div className="form-content__field-container">
+        <div className="form-content__field">
+          <input
+            className="form-content__input"
+            type={type}
+            placeholder={placeholder}
+            maxLength={maxLength}
+            name={name}
+            onChange={onChange}
+            value={value}
+          />
+        </div>
+        <hr className="form-content__underline"/>
+        <div className="form-content__subscript-container">
+          {`${value.length}/${maxLength}`}
+        </div>
+      </div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ interface Props {
   folder: Folder | null;
   selectedFolder: Folder | null;
   setSelectedFolder: Dispatch<SetStateAction<Folder | null>>;
-}
+};
 
 export const FoldersSelectorListItem: React.FC<Props> = ({
   folder,
@@ -32,7 +32,9 @@ export const FoldersSelectorListItem: React.FC<Props> = ({
       >
         {folder?.folder_name}
       </span>
-      <FolderContextMenuButton />
+      <FolderContextMenuButton
+        folder={folder}
+      />
     </li>
   );
 };

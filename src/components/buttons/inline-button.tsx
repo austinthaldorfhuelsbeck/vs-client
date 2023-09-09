@@ -21,9 +21,7 @@ export const InlineButton: React.FC<Props> = ({
       {icon && (
         <FontAwesomeIcon icon={icon} />
       )}
-      &nbsp;
-      &nbsp;
-      {title}
+      {" " + title}
     </button>
   )
 };

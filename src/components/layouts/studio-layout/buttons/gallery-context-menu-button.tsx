@@ -1,7 +1,7 @@
 import { faEllipsis, faFileImport, faPencil, faShareAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, MouseEvent } from "react";
-import { ContextMenu } from "../menus/context-menu";
+import { ContextMenu } from "../../../menus/context-menu";
 import { MenuItem } from "src/models/menu-item";
 
 // mouse coordinates
@@ -80,7 +80,7 @@ export const GalleryContextMenuButton: React.FC = () => {
 					xPosition={points.x}
 					yPosition={points.y}
 					menuItems={menuItems}
-					onContextClick={onContextClick}
+					setIsContextMenu={setIsContextMenu}
 				/>
 			)}
 		</>

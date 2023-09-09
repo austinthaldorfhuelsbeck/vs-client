@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { UserProfile } from "src/models/user-profile";
 import { Company } from "src/models/company";
-import { CompaniesSelectorListItem } from "src/components/selectors/companies-selector-li";
+import { CompaniesSelectorListItem } from "src/components/layouts/studio-layout/selectors/companies-selector-li";
 
 interface Props {
   userProfile: UserProfile | null;

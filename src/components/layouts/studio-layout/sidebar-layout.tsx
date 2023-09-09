@@ -4,11 +4,8 @@ import { ApiResponse } from "src/models/api-response";
 import { Company } from "src/models/company";
 import { Folder } from "src/models/folder";
 import { getCompany } from "src/services/companies.service";
-import { InlineButton } from "../buttons/inline-button";
-import { StudioModal } from "../modals/studio-modal";
-import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
-import { NewFolderForm } from "../forms/new-folder-form";
-import { FoldersSelector } from "../selectors/folders-selector";
+import { FoldersSelector } from "src/components/layouts/studio-layout/selectors/folders-selector";
+import { FolderStudioModal } from "./modals/folder-stuido-modal";
 
 interface Props {
   selectedCompany: Company | null;
@@ -22,8 +19,6 @@ export const SidebarLayout: React.FC<Props> = ({
   setSelectedFolder
 }) => {
   const { getAccessTokenSilently } = useAuth0();
-
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [folders, setFolders] = useState<Array<Folder | null>>([]);
 
   // Load folders from selectedCompany
@@ -55,25 +50,14 @@ export const SidebarLayout: React.FC<Props> = ({
       setSelectedFolder(folders[0]);
   }, [folders, setSelectedFolder]);
 
-    return selectedCompany && (
+  return selectedCompany && (
     <div className="content-block-layout__folders">
       <h4 className="content-block__header">Folders</h4>
-      <InlineButton
-        onClick={() => setModalIsOpen(true)}
-        icon={faFolderPlus}
-        title="New Folder"
+      <FolderStudioModal
+        folders={folders}
+        setFolders={setFolders}
+        selectedCompany={selectedCompany}
       />
-      <StudioModal
-        isOpen={modalIsOpen}
-        onClose={() => setModalIsOpen(false)}
-      >
-        <NewFolderForm
-          company_id={selectedCompany.company_id}
-          onClose={() => setModalIsOpen(false)}
-          folders={folders}
-          setFolders={setFolders}
-        />
-      </StudioModal>
       <FoldersSelector
         folders={folders}
         selectedFolder={selectedFolder}

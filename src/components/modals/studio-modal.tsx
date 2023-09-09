@@ -9,13 +9,13 @@ import styles from "./studio-modal.module.scss"
 
 interface Props {
   isOpen: boolean;
-  onClose: () => void;
+  closeModal: () => void;
   children: JSX.Element;
 };
 
 export const StudioModal: React.FC<Props> = ({
   isOpen,
-  onClose,
+  closeModal,
   children
 }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -29,17 +29,17 @@ export const StudioModal: React.FC<Props> = ({
 
   // event listener for close
   const onCancel = useCallback(
-    () => onClose(),
-    [onClose]
+    () => closeModal(),
+    [closeModal]
   );
 
   // event listener for clicking outside
   const onClick = useCallback(
     (e: MouseEvent) => {
       const { current: el } = modalRef;
-      if (e.target === el) onClose();
+      if (e.target === el) closeModal();
     },
-    [onClose]
+    [closeModal]
   );
 
   // event listener for close click on anim end
@@ -58,7 +58,7 @@ export const StudioModal: React.FC<Props> = ({
     <dialog
       ref={modalRef}
       className={dialogClasses}
-      onClose={onClose}
+      onClose={closeModal}
       onCancel={onCancel}
       onClick={onClick}
       onAnimationEnd={onAnimEnd}

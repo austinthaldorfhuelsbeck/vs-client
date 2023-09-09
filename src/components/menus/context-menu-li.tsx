@@ -15,7 +15,10 @@ export const MenuListItem: React.FC<Props> = ({
 }) => {
 	return (
 		<div className="context-menu__item">
-				<FontAwesomeIcon icon={icon} />{title}
+				<FontAwesomeIcon icon={icon} />
+				&nbsp;
+				&nbsp;
+				{title}
 		</div>
 	);
 };

@@ -1,5 +1,6 @@
 @import "auth0-features.css";
 @import "button.css";
+@import "form.css";
 @import "code-snippet.css";
 @import "page-footer.css";
 @import "hero-banner.css";
@@ -41,4 +42,13 @@
 
 .card__headers-container {
   padding: 2px 16px;
+}
+
+.card__headers-container h4, h5, h6, p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.card__headers-container p {
+  font-size: 65%;
 }

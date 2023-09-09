@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, Dispatch, SetStateAction } from "react";
+import React, { useState, MouseEvent, Dispatch, SetStateAction, useEffect } from "react";
 import { InputGroup } from "./input-group";
 import { BaseFolder, Folder } from "src/models/folder";
 import { InlineButton } from "../buttons/inline-button";
@@ -7,16 +7,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
   company_id: number;
-  onClose: () => void;
+  closeModal: () => void;
   folders: Array<Folder | null>;
   setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
+  folder: Folder | null;
 };
 
-export const NewFolderForm: React.FC<Props> = ({
+export const FolderForm: React.FC<Props> = ({
   company_id,
-  onClose,
+  closeModal,
   folders,
-  setFolders
+  setFolders,
+  folder
 }) => {
   const initialFormData: BaseFolder = {
     "company_id": company_id,
@@ -25,7 +27,10 @@ export const NewFolderForm: React.FC<Props> = ({
     "updated_at": new Date()
   };
   const [formData, setFormData] = useState<BaseFolder>(initialFormData);
-  
+  useEffect(() => {
+    if (folder) setFormData(folder);
+  }, [folder])
+
   const { getAccessTokenSilently } = useAuth0();
 
   const onChange = (e: any) => {
@@ -51,7 +56,7 @@ export const NewFolderForm: React.FC<Props> = ({
         const newFolder: Folder = await (await createFolder(accessToken, formData)).data;
         
         setFormData(initialFormData); // clear the form
-        onClose(); // close the modal dialogue
+        closeModal(); // close the modal dialogue
         setFolders([ ...folders, newFolder ]) // update folders list
       } catch (error: any) {
         console.log(error);
@@ -66,16 +71,19 @@ export const NewFolderForm: React.FC<Props> = ({
       <InputGroup
         type="text"
         name="folder_name"
-        title="New Folder"
+        title={folder ? "Folder" : "New Folder"}
         placeholder="Folder Name"
+        maxLength={40}
         onChange={onChange}
         value={formData.folder_name}
       />
-      <InlineButton
-        onClick={onSubmit}
-        icon={null}
-        title="Create Folder"
-      />
+      <div className="form-content__actions">
+        <InlineButton
+          onClick={onSubmit}
+          icon={null}
+          title={folder ? "Update Folder" : "Create Folder"}
+        />
+      </div>
     </form>
   );
 };

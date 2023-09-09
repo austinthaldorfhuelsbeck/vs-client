@@ -8,9 +8,9 @@ import { Folder } from "src/models/folder";
 // API Services
 import { getUserByEmail } from "src/services/users.service";
 // Components
-import { PageLayout } from "../page-layout";
+import { PageLayout } from "../../page-layout";
 import { FolderLayout } from "./folder-layout";
-import { CompaniesSelector } from "../selectors/companies-selector";
+import { CompaniesSelector } from "src/components/layouts/studio-layout/selectors/companies-selector"; 
 import { SidebarLayout } from "./sidebar-layout";
 
 export const StudioLayout: React.FC = () => {

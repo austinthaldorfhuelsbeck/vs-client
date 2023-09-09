@@ -1,8 +1,9 @@
 import { faEllipsisVertical, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { MouseEvent, useState } from "react";
-import { ContextMenu } from "../menus/context-menu";
+import { ContextMenu } from "../../../menus/context-menu";
 import { MenuItem } from "src/models/menu-item";
+import { Folder } from "src/models/folder";
 
 // mouse coordinates
 interface Points {
@@ -10,7 +11,14 @@ interface Points {
   y: number;
 };
 
-export const FolderContextMenuButton: React.FC = () => {
+interface Props {
+	folder: Folder | null;
+};
+
+export const FolderContextMenuButton: React.FC<Props> = ({
+	folder
+}) => {
+
 	// menu display state
 	const [isContextMenu, setIsContextMenu] = useState<boolean>(false);
 	const [points, setPoints] = useState<Points>({
@@ -30,8 +38,8 @@ export const FolderContextMenuButton: React.FC = () => {
 	// context menu items
 	const renameFolder = (e: any) => {
 		e.preventDefault();
-		console.log("Rename");
-  };
+		// onClick(folder);
+	};
   const deleteFolder = (e: any) => {
       e.preventDefault();
       console.log("Delete");
@@ -62,7 +70,7 @@ export const FolderContextMenuButton: React.FC = () => {
           xPosition={points.x}
           yPosition={points.y}
           menuItems={menuItems}
-					onContextClick={onContextClick}
+					setIsContextMenu={setIsContextMenu}
         />
       )}
 		</>
