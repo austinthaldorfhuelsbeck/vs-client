@@ -1,20 +1,18 @@
 
 import React, { CSSProperties, Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
-import { MenuItem } from "src/models/menu-item";
-import { MenuListItem } from "./context-menu-li";
 
 interface ContextMenuProps {
   xPosition: number;
   yPosition: number;
-  menuItems: Array<MenuItem>;
   setIsContextMenu: Dispatch<SetStateAction<boolean>>;
+  children: JSX.Element;
 };
 
 export const ContextMenu: React.FC<ContextMenuProps> = ({
   xPosition,
   yPosition,
-  menuItems,
-  setIsContextMenu
+  setIsContextMenu,
+  children
 }) => {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -37,20 +35,6 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
         left: xPosition - 80 // of the cursor
     }
 
-    // build the menu
-    const listMenu = (items: Array<MenuItem>) => {
-        return items.map((item, index) => (
-            <div
-                key={index}
-                onClick={item.action}
-            >
-                <MenuListItem
-                    icon={item.icon}
-                    title={item.title}
-                />
-            </div>
-        ));
-    };
 
     return (
         <div
@@ -58,7 +42,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
             className="context-menu"
             style={contextMenuStyle}
         >
-            {listMenu(menuItems)}
+            {children}
         </div>
     );
 };

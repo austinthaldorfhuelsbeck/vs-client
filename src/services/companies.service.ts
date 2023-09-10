@@ -6,7 +6,7 @@ const apiServerURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const getCompany = async (
   accessToken: string,
-  id: number,
+  id: number
 ): Promise<ApiResponse> => {
   const config: AxiosRequestConfig = {
     url: `${apiServerURL}/companies/${id}`,
@@ -18,10 +18,30 @@ export const getCompany = async (
   };
 
   const { data, error } = (await callExternalApi({ config })) as ApiResponse;
-  // console.log("Data: ", data, " Err: ", error);
 
   return {
     data,
     error,
   };
 };
+
+export const getFoldersByCompanyID = async (
+  accessToken: string,
+  id: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerURL}/companies/${id}/folders`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+
+  return {
+    data,
+    error,
+  };
+}

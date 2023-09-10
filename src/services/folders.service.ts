@@ -47,3 +47,26 @@ export const createFolder = async (
     error
   };
 };
+
+export const updateFolder = async (
+  accessToken: string,
+  folder: BaseFolder,
+  id: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerURL}/folders/${id}`,
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    },
+    data: folder
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+
+  return {
+    data,
+    error
+  };
+};

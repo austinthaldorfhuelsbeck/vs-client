@@ -4,12 +4,14 @@ import { FoldersSelectorListItem } from "./folders-selector-li";
 
 interface Props {
   folders: Array<Folder | null>;
+  setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
   selectedFolder: Folder | null;
   setSelectedFolder: Dispatch<SetStateAction<Folder | null>>;
 };
 
 export const FoldersSelector: React.FC<Props> = ({
   folders,
+  setFolders,
   selectedFolder,
   setSelectedFolder
 }) => {
@@ -23,6 +25,8 @@ export const FoldersSelector: React.FC<Props> = ({
             folder={folder}
             selectedFolder={selectedFolder}
             setSelectedFolder={setSelectedFolder}
+            folders={folders}
+            setFolders={setFolders}
             />
         ) :
         <></>

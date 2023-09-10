@@ -5,7 +5,9 @@ import { Company } from "src/models/company";
 import { Folder } from "src/models/folder";
 import { getCompany } from "src/services/companies.service";
 import { FoldersSelector } from "src/components/layouts/studio-layout/selectors/folders-selector";
-import { FolderStudioModal } from "./modals/folder-stuido-modal";
+import { FolderStudioModal } from "./modals/folder-studio-modal";
+import { InlineButton } from "src/components/buttons/inline-button";
+import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   selectedCompany: Company | null;
@@ -56,10 +58,18 @@ export const SidebarLayout: React.FC<Props> = ({
       <FolderStudioModal
         folders={folders}
         setFolders={setFolders}
-        selectedCompany={selectedCompany}
-      />
+        company_id={selectedCompany.company_id}
+        folder={null}
+      >
+        <InlineButton
+          onClick={(e: MouseEvent) => e.preventDefault()}
+          icon={faFolderPlus}
+          title="New Folder"
+        />
+      </FolderStudioModal>
       <FoldersSelector
         folders={folders}
+        setFolders={setFolders}
         selectedFolder={selectedFolder}
         setSelectedFolder={setSelectedFolder}
       />

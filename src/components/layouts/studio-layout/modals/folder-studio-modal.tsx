@@ -1,21 +1,22 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { InlineButton } from "../../../buttons/inline-button";
-import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { StudioModal } from "../../../modals/studio-modal";
 import { FolderForm } from "../../../forms/folder-form";
-import { Company } from "src/models/company";
 import { Folder } from "src/models/folder";
 
 interface Props {
-  selectedCompany: Company;
+  company_id: number;
 	folders: Array<Folder | null>;
   setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
+	folder: Folder | null;
+	children: JSX.Element;
 };
 
 export const FolderStudioModal: React.FC<Props> = ({
-	selectedCompany,
+	company_id,
 	folders,
-	setFolders
+	setFolders,
+	folder,
+	children
 }) => {
 	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 	// const [formData, setFormData] = useState<Folder | null>(null);
@@ -25,22 +26,24 @@ export const FolderStudioModal: React.FC<Props> = ({
 	const closeModal = () => setModalIsOpen(false);
 	
 	return (
-		<>
-			<InlineButton
-				onClick={openModal}
-				icon={faFolderPlus}
-				title="New Folder" />
-			<StudioModal
-				isOpen={modalIsOpen}
-				closeModal={closeModal}
-			>
-				<FolderForm
-					company_id={selectedCompany.company_id}
+			<>
+				<div
+					style={{ "display": "inline-grid" }}
+					onClick={openModal}
+				>
+					{children}
+				</div>
+				<StudioModal
+					isOpen={modalIsOpen}
 					closeModal={closeModal}
-					folders={folders}
-					setFolders={setFolders}
-					folder={null} />
-			</StudioModal>
-		</>
-	);
+				>
+					<FolderForm
+						company_id={company_id}
+						closeModal={closeModal}
+						folders={folders}
+						setFolders={setFolders}
+						folder={folder} />
+				</StudioModal>
+			</>
+		);
 	};

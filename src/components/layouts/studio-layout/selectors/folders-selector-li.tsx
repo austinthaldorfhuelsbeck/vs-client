@@ -5,12 +5,16 @@ import { Folder } from "src/models/folder";
 import { FolderContextMenuButton } from "../buttons/folder-context-menu-button";
 
 interface Props {
+  folders: Array<Folder | null>;
+  setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
   folder: Folder | null;
   selectedFolder: Folder | null;
   setSelectedFolder: Dispatch<SetStateAction<Folder | null>>;
 };
 
 export const FoldersSelectorListItem: React.FC<Props> = ({
+  folders,
+  setFolders,
   folder,
   selectedFolder,
   setSelectedFolder
@@ -34,7 +38,10 @@ export const FoldersSelectorListItem: React.FC<Props> = ({
       </span>
       <FolderContextMenuButton
         folder={folder}
+        folders={folders}
+        setFolders={setFolders}
       />
+
     </li>
   );
 };

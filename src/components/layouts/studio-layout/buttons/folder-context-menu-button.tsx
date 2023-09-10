@@ -1,9 +1,10 @@
 import { faEllipsisVertical, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { MouseEvent, useState } from "react";
+import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { ContextMenu } from "../../../menus/context-menu";
-import { MenuItem } from "src/models/menu-item";
 import { Folder } from "src/models/folder";
+import { ContextMenuListItem } from "src/components/menus/context-menu-li";
+import { FolderStudioModal } from "../modals/folder-studio-modal";
 
 // mouse coordinates
 interface Points {
@@ -13,10 +14,14 @@ interface Points {
 
 interface Props {
 	folder: Folder | null;
+	folders: Array<Folder | null>;
+  setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
 };
 
 export const FolderContextMenuButton: React.FC<Props> = ({
-	folder
+	folder,
+	folders,
+	setFolders
 }) => {
 
 	// menu display state
@@ -36,28 +41,12 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 	};
 
 	// context menu items
-	const renameFolder = (e: any) => {
-		e.preventDefault();
-		// onClick(folder);
-	};
   const deleteFolder = (e: any) => {
       e.preventDefault();
       console.log("Delete");
   };
-  const menuItems: Array<MenuItem> = [
-      {
-          title: "Rename",
-          icon: faPencil,
-          action: renameFolder
-      },
-      {
-          title: "Delete",
-          icon: faTrash,
-          action: deleteFolder
-      }
-  ];
 	
-	return (
+	return folder && (
 		<>
 			<button
 				className="content-block__button"
@@ -69,9 +58,28 @@ export const FolderContextMenuButton: React.FC<Props> = ({
         <ContextMenu
           xPosition={points.x}
           yPosition={points.y}
-          menuItems={menuItems}
 					setIsContextMenu={setIsContextMenu}
-        />
+        >
+					<>
+						<FolderStudioModal
+							company_id={folder.company_id}
+							folder={folder}
+							folders={folders}
+							setFolders={setFolders}
+						>
+							<ContextMenuListItem
+								onClick={(e: MouseEvent) => e.preventDefault()}
+								title="Rename"
+								icon={faPencil}
+							/>
+						</FolderStudioModal>
+						<ContextMenuListItem
+							onClick={deleteFolder}
+							title="Delete"
+							icon={faTrash}
+						/>
+					</>
+				</ContextMenu>
       )}
 		</>
 	);

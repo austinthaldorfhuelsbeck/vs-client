@@ -79,9 +79,10 @@ export const GalleryContextMenuButton: React.FC = () => {
 				<ContextMenu
 					xPosition={points.x}
 					yPosition={points.y}
-					menuItems={menuItems}
 					setIsContextMenu={setIsContextMenu}
-				/>
+				>
+					<></>
+				</ContextMenu>
 			)}
 		</>
 	);
