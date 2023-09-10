@@ -27,7 +27,6 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 	folders,
 	setFolders
 }) => {
-
 	// menu display state
 	const [isContextMenu, setIsContextMenu] = useState<boolean>(false);
 	const [points, setPoints] = useState<Points>({
@@ -62,7 +61,6 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 						<FolderStudioModal
 							company_id={folder.company_id}
 							folder={folder}
-							folders={folders}
 							setFolders={setFolders}
 						>
 							<ContextMenuListItem

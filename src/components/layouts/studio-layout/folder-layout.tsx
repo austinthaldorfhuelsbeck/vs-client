@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Folder } from "src/models/folder";
 import { Gallery } from "src/models/gallery";
-import { FolderLayoutListItem } from "./selectors/folder-layout-li";
+import { FolderLayoutGallery } from "./selectors/folder-layout-gallery";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { InlineButton } from "../../buttons/inline-button";
-import { StudioModal } from "../../modals/studio-modal";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ApiResponse } from "src/models/api-response";
 import { getFolder } from "src/services/folders.service";
-import { GalleryForm } from "../../forms/gallery-form";
+import { GalleryStudioModal } from "./modals/gallery-studio-modal";
 
 interface Props {
   selectedFolder: Folder | null;
@@ -18,8 +17,6 @@ export const FolderLayout: React.FC<Props> = ({
   selectedFolder
 }) => {
   const { getAccessTokenSilently } = useAuth0();
-  
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [galleries, setGalleries] = useState<Array<Gallery | null>>([]);
 
   // Load galleries from selectedFolder
@@ -50,28 +47,25 @@ export const FolderLayout: React.FC<Props> = ({
     <div className="content-block-layout__galleries">
       <div className="content-block__container">
         <h4 className="content-block__header">{selectedFolder?.folder_name}</h4>
-        <InlineButton
-          onClick={() => setModalIsOpen(true)}
-          icon={faPlus}
-          title="New Gallery"
-        />
-        <StudioModal
-          isOpen={modalIsOpen}
-          closeModal={() => setModalIsOpen(false)}
+        <GalleryStudioModal
+          setGalleries={setGalleries}
+          folder_id={selectedFolder.folder_id}
+          gallery={null}
         >
-          <GalleryForm
-            folder_id={selectedFolder.folder_id}
-            closeModal={() => setModalIsOpen(false)}
-            galleries={galleries}
-            setGalleries={setGalleries}
+          <InlineButton
+            onClick={(e: MouseEvent) => e.preventDefault()}
+            icon={faPlus}
+            title="New Gallery"
           />
-        </StudioModal>
+        </GalleryStudioModal>
       </div>
       <ul>
         {galleries.map((gallery: Gallery | null) => gallery && (
-            <FolderLayoutListItem
+            <FolderLayoutGallery
               key={gallery.gallery_id}
               gallery={gallery}
+              galleries={galleries}
+              setGalleries={setGalleries}
             />
           )
         )}

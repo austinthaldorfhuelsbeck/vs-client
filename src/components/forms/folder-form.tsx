@@ -1,17 +1,14 @@
-import React, { useState, Dispatch, SetStateAction, FormEvent } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import { InputGroup } from "./input-group";
 import { BaseFolder, Folder } from "src/models/folder";
 import { SubmitButton } from "../buttons/forms/submit-button";
 import { createFolder, updateFolder } from "src/services/folders.service";
-// import { useAuth0 } from "@auth0/auth0-react";
-// import { ApiResponse } from "src/models/api-response";
 import { getFoldersByCompanyID } from "src/services/companies.service";
 import { CancelButton } from "../buttons/forms/cancel-button";
 
 interface Props {
   company_id: number;
   closeModal: () => void;
-  folders: Array<Folder | null>;
   setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
   folder: Folder | null;
 };
@@ -19,13 +16,9 @@ interface Props {
 export const FolderForm: React.FC<Props> = ({
   company_id,
   closeModal,
-  folders,
   setFolders,
   folder
 }) => {
-  // auth0
-  // const { getAccessTokenSilently } = useAuth0();
-
   // form state
   const initialFormData: BaseFolder = {
     "company_id": company_id,

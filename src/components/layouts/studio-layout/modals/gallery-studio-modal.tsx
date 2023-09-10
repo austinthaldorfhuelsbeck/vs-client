@@ -1,24 +1,24 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { StudioModal } from "../../../modals/studio-modal";
-import { FolderForm } from "../../../forms/folder-form";
-import { Folder } from "src/models/folder";
+import { GalleryForm } from "src/components/forms/gallery-form";
+import { Gallery } from "src/models/gallery";
 
 interface Props {
-  company_id: number;
-  setFolders: Dispatch<SetStateAction<Array<Folder | null>>>;
-	folder: Folder | null;
+  folder_id: number;
+  setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
+	gallery: Gallery | null;
 	children: JSX.Element;
 };
 
-export const FolderStudioModal: React.FC<Props> = ({
-	company_id,
-	setFolders,
-	folder,
+export const GalleryStudioModal: React.FC<Props> = ({
+	folder_id,
+	setGalleries,
+	gallery,
 	children
 }) => {
 	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 	
-	// handlers for folder modal
+	// handlers for gallery modal
 	const openModal = () => setModalIsOpen(true);
 	const closeModal = () => setModalIsOpen(false);
 	
@@ -34,11 +34,12 @@ export const FolderStudioModal: React.FC<Props> = ({
 					isOpen={modalIsOpen}
 					closeModal={closeModal}
 				>
-					<FolderForm
-						company_id={company_id}
+					<GalleryForm
+						folder_id={folder_id}
 						closeModal={closeModal}
-						setFolders={setFolders}
-						folder={folder} />
+						setGalleries={setGalleries}
+						gallery={gallery}
+					/>
 				</StudioModal>
 			</>
 		);

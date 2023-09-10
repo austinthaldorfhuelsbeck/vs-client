@@ -26,3 +26,47 @@ export const createGallery = async (
     error
   };
 };
+
+export const updateGallery = async (
+  accessToken: string,
+  gallery: BaseGallery,
+  id: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerURL}/galleries/${id}`,
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    },
+    data: gallery
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+
+  return {
+    data,
+    error
+  };
+};
+
+export const deleteGallery = async (
+  accessToken: string,
+  id: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerURL}/galleries/${id}`,
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+
+  return {
+    data,
+    error
+  };
+};

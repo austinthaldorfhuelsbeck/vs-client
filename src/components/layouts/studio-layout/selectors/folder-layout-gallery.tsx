@@ -1,13 +1,19 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { Gallery } from "src/models/gallery";
 import { GalleryContextMenuButton } from "../buttons/gallery-context-menu-button";
 
 interface Props {
   gallery: Gallery | null;
+  galleries: Array<Gallery | null>;
+  setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
 }
 
-export const FolderLayoutListItem: React.FC<Props> = ({ gallery }) => {
+export const FolderLayoutGallery: React.FC<Props> = ({
+  gallery,
+  galleries,
+  setGalleries
+}) => {
   // format date nicely
   const updatedDate: string = gallery?.updated_at ? (
       new Date(gallery.updated_at).toLocaleDateString(
@@ -33,7 +39,11 @@ export const FolderLayoutListItem: React.FC<Props> = ({ gallery }) => {
           <p>{`Updated - ${updatedDate}`}</p>
         </div>
       </Link>
-      <GalleryContextMenuButton />
+      <GalleryContextMenuButton
+        gallery={gallery}
+        galleries={galleries}
+        setGalleries={setGalleries}
+      />
     </li>
   )
 }

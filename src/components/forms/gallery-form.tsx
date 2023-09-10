@@ -1,36 +1,34 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React, { Dispatch, SetStateAction, useState, MouseEvent } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { BaseGallery, Gallery } from "src/models/gallery";
 import { InputGroup } from "./input-group";
-import { InlineButton } from "../buttons/inline-button";
-import { createGallery } from "src/services/galleries.service";
-import { useNavigate } from "react-router-dom";
+import { createGallery, updateGallery } from "src/services/galleries.service";
 import { CancelButton } from "../buttons/forms/cancel-button";
+import { SubmitButton } from "../buttons/forms/submit-button";
+import { getGalleriesByFolderID } from "src/services/folders.service";
 
 interface Props {
   folder_id: number;
   closeModal: () => void;
-  galleries: Array<Gallery | null>;
   setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
+  gallery: Gallery | null;
 };
 
 export const GalleryForm: React.FC<Props> = ({
   folder_id,
   closeModal,
-  galleries,
-  setGalleries
+  setGalleries,
+  gallery
 }) => {
+  // form state
   const initialFormData: BaseGallery = {
     "folder_id": folder_id,
     "gallery_name": "",
     "created_at": new Date(),
     "updated_at": new Date()
   };
-  const [formData, setFormData] = useState<BaseGallery>(initialFormData);
+  const [formData, setFormData] = useState<BaseGallery>(gallery || initialFormData);
 
-  const { getAccessTokenSilently } = useAuth0();
-  const navigate = useNavigate();
-
+  // change handler
   const onChange = (e: any) => {
     setFormData({
       ...formData,
@@ -38,55 +36,36 @@ export const GalleryForm: React.FC<Props> = ({
     });
   };
 
-  const onSubmit = (e: MouseEvent) => {
-    e.preventDefault();
-    const createGalleryResponse = async (gallery: BaseGallery) => {
-      const audienceURL = process.env.REACT_APP_AUTH0_AUDIENCE;
-
-      try {
-        const accessToken = await getAccessTokenSilently({
-          authorizationParams: {
-            audience: audienceURL,
-            scope: "read:current_user"
-          }
-        });
-
-        const newGallery: Gallery = await (await createGallery(accessToken, formData)).data;
-        
-        setFormData(initialFormData); // clear the form
-        closeModal(); // close the modal dialogue
-        setGalleries([ ...galleries, newGallery ]) // update galleries list
-        navigate(`/studio/galleries/${newGallery.gallery_id}`) // go to new gallery
-      } catch (error: any) {
-        console.log(error);
-      };
-    }
-
-    createGalleryResponse(formData);
-  };
-
   return (
     <form className="form-content__form-container">
       <CancelButton
         setFormData={setFormData}
-        initialFormData={initialFormData}
+        initialFormData={gallery ? formData : initialFormData}
         closeModal={closeModal}
       />
       <InputGroup
         type="text"
         name="gallery_name"
-        title="New Gallery"
+        title={gallery ? "Gallery" : "New Gallery"}
         placeholder="Gallery Name"
         maxLength={40}
         onChange={onChange}
         value={formData.gallery_name}
       />
       <div className="form-content__actions">
-        <InlineButton
-          onClick={onSubmit}
-          icon={null}
-          title="Create Gallery"
-        />
+        <SubmitButton
+            closeModal={closeModal}
+            formData={formData}
+            setFormData={setFormData}
+            id={gallery?.gallery_id}
+            cleanup_id={folder_id}
+            setItems={setGalleries}
+            itemService={gallery ? updateGallery : createGallery}
+            cleanupService={getGalleriesByFolderID}
+            initialFormData={initialFormData}
+            icon={null}
+            title={gallery ? "Rename Gallery" : "Create Gallery"}
+          />
       </div>
     </form>
   )

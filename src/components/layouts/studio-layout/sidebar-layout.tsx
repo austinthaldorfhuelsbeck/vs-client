@@ -56,7 +56,6 @@ export const SidebarLayout: React.FC<Props> = ({
     <div className="content-block-layout__folders">
       <h4 className="content-block__header">Folders</h4>
       <FolderStudioModal
-        folders={folders}
         setFolders={setFolders}
         company_id={selectedCompany.company_id}
         folder={null}
