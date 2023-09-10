@@ -61,7 +61,7 @@ export const FolderLayout: React.FC<Props> = ({
         >
           <GalleryForm
             folder_id={selectedFolder.folder_id}
-            onClose={() => setModalIsOpen(false)}
+            closeModal={() => setModalIsOpen(false)}
             galleries={galleries}
             setGalleries={setGalleries}
           />

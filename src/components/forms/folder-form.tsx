@@ -6,6 +6,7 @@ import { createFolder, updateFolder } from "src/services/folders.service";
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { ApiResponse } from "src/models/api-response";
 import { getFoldersByCompanyID } from "src/services/companies.service";
+import { CancelButton } from "../buttons/forms/cancel-button";
 
 interface Props {
   company_id: number;
@@ -43,7 +44,12 @@ export const FolderForm: React.FC<Props> = ({
   };
 
   return (
-    <form>
+    <form className="form-content__form-container">
+      <CancelButton
+        setFormData={setFormData}
+        initialFormData={initialFormData}
+        closeModal={closeModal}
+      />
       <InputGroup
         type="text"
         name="folder_name"

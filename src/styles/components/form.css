@@ -12,6 +12,10 @@
 	padding-bottom: 1.25rem;
 }
 
+.form-content__form-container {
+	position: relative;
+}
+
 .form-content__field {
 	padding: 0.5rem 0;
 	border-top: 1rem solid transparent;
@@ -41,4 +45,15 @@
 	justify-content: flex-end;
 	padding: 0.5rem 0;
 	margin-bottom: -1rem;
+}
+
+.form-content__cancel-button {
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 150%;
+	text-align: right;
+
+	cursor: pointer;
+
+	position: absolute;
+	left: 95%;
 }

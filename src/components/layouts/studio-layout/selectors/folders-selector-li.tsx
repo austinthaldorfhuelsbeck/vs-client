@@ -19,29 +19,39 @@ export const FoldersSelectorListItem: React.FC<Props> = ({
   selectedFolder,
   setSelectedFolder
 }) => {
-  return (
-    <li
-      className="content-block__tab"
-      onClick={() => setSelectedFolder(folder)}
-    >
-      {(folder?.folder_name === "Uncategorized") ?
-        <FontAwesomeIcon icon={faThLarge} /> :
-        <FontAwesomeIcon icon={faFolder} />}
-      <span
-        className={
-          (folder?.folder_id === selectedFolder?.folder_id) ?
-          "content-block__title--active" :
-          "content-block__title"
-        }
-      >
-        {folder?.folder_name}
-      </span>
+  // conditional rendering functions
+  const renderIcon = (folder: Folder) => {
+    return (folder.folder_name === "Uncategorized") ?
+      <FontAwesomeIcon icon={faThLarge} /> :
+      <FontAwesomeIcon icon={faFolder} />
+  };
+  const renderTitle = (folder: Folder) => {
+    const spanClassName: string = (folder.folder_id === selectedFolder?.folder_id) ?
+      "content-block__title--active" :
+      "content-block__title";
+    
+    return (
+      <span className={spanClassName}>{folder.folder_name}</span>
+    );
+  };
+  const renderButton = (folder: Folder) => {
+    return (folder.folder_name !== "Uncategorized") && (
       <FolderContextMenuButton
         folder={folder}
         folders={folders}
         setFolders={setFolders}
       />
+    )
+  }
 
+  return folder && (
+    <li
+      className="content-block__tab"
+      onClick={() => setSelectedFolder(folder)}
+    >
+      {renderIcon(folder)}
+      {renderTitle(folder)}
+      {renderButton(folder)}
     </li>
   );
 };
