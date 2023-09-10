@@ -40,6 +40,8 @@ export const SubmitButton: React.FC<Props> = ({
 	// submit handler
 	const onSubmit = (e: MouseEvent) => {
     e.preventDefault();
+
+		// create or update item
     const getItemResponse = async (formData: any, item_id: number | undefined) => {
       const audienceURL = process.env.REACT_APP_AUTH0_AUDIENCE;
 
@@ -58,7 +60,7 @@ export const SubmitButton: React.FC<Props> = ({
 					await itemService(accessToken, formData);
 				}
 
-        // update the items list
+        // refresh items state
 				const getCleanupResponse = async (id: number) => {
 					try {
 						const cleanupResponse: ApiResponse = await cleanupService(accessToken, id);
@@ -77,7 +79,7 @@ export const SubmitButton: React.FC<Props> = ({
       } catch (error: any) {
         console.log(error);
       };
-    }
+    };
 
     getItemResponse(formData, id);
   };

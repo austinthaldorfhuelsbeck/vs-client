@@ -47,7 +47,7 @@ export const FolderForm: React.FC<Props> = ({
     <form className="form-content__form-container">
       <CancelButton
         setFormData={setFormData}
-        initialFormData={initialFormData}
+        initialFormData={folder ? formData : initialFormData}
         closeModal={closeModal}
       />
       <InputGroup

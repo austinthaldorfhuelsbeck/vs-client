@@ -1,10 +1,14 @@
-import { faEllipsisVertical, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+/* eslint-disable no-restricted-globals */
+import { faEllipsisVertical, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { ContextMenu } from "../../../menus/context-menu";
 import { Folder } from "src/models/folder";
 import { ContextMenuListItem } from "src/components/menus/context-menu-li";
 import { FolderStudioModal } from "../modals/folder-studio-modal";
+import { DeleteButton } from "./delete-button";
+import { deleteFolder } from "src/services/folders.service";
+import { getFoldersByCompanyID } from "src/services/companies.service";
 
 // mouse coordinates
 interface Points {
@@ -33,18 +37,12 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 	
 	// event handler for context menu button
 	const onContextClick = (e: MouseEvent<HTMLButtonElement>) => {
-		setIsContextMenu((currentState) => !currentState);
+		setIsContextMenu((currentState: boolean) => !currentState);
 		setPoints({
 			x: e.pageX,
 			y: e.pageY
 		});
 	};
-
-	// context menu items
-  const deleteFolder = (e: any) => {
-      e.preventDefault();
-      console.log("Delete");
-  };
 	
 	return folder && (
 		<>
@@ -73,10 +71,14 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 								icon={faPencil}
 							/>
 						</FolderStudioModal>
-						<ContextMenuListItem
-							onClick={deleteFolder}
-							title="Delete"
-							icon={faTrash}
+						<DeleteButton
+							item={folder}
+							id={folder.folder_id}
+							deleteService={deleteFolder}
+							cleanupService={getFoldersByCompanyID}
+							setItems={setFolders}
+							cleanup_id={folder.company_id}
+							closeContextMenu={() => setIsContextMenu(false)}
 						/>
 					</>
 				</ContextMenu>

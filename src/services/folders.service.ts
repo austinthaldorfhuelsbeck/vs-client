@@ -70,3 +70,24 @@ export const updateFolder = async (
     error
   };
 };
+
+export const deleteFolder = async (
+  accessToken: string,
+  id: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerURL}/folders/${id}`,
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+
+  return {
+    data,
+    error
+  };
+};

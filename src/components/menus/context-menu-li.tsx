@@ -14,7 +14,7 @@ export const ContextMenuListItem: React.FC<Props> = ({
 	title
 }) => {
 	return (
-		<div className="context-menu__item">
+		<div className="context-menu__item" onClick={onClick}>
 				<FontAwesomeIcon icon={icon} />
 				&nbsp;
 				&nbsp;
