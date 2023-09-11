@@ -66,7 +66,7 @@ export const MoveGalleryToFolderForm: React.FC<Props> = ({
 		>
 			<CancelButton
 				setFormData={setSearchData}
-				initialFormData={""}
+				initialFormData={{ data: "" }}
 				closeModal={closeModal}
 			/>
 			<InputGroup

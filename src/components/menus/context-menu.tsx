@@ -4,6 +4,7 @@ import React, { CSSProperties, Dispatch, RefObject, SetStateAction, useEffect, u
 interface ContextMenuProps {
   xPosition: number;
   yPosition: number;
+  containerRef: RefObject<HTMLDivElement>;
   setIsContextMenu: Dispatch<SetStateAction<boolean>>;
   children: JSX.Element;
 };
@@ -11,23 +12,23 @@ interface ContextMenuProps {
 export const ContextMenu: React.FC<ContextMenuProps> = ({
   xPosition,
   yPosition,
+  containerRef,
   setIsContextMenu,
   children
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
-
     // event listener to hide menu on click outside
     useEffect(() => {
         const handleClickOutside = (e: any) => {
-            if (ref.current && !ref.current.contains(e.target)) {
+            if (containerRef.current && !containerRef.current.contains(e.target)) {
                 setIsContextMenu(false);
+                console.log("Click outside. Context Menu: ", false);
             }
         };
         document.addEventListener("click", handleClickOutside, true);
         return () => {
             document.removeEventListener("click", handleClickOutside, true);
         }
-    }, [ref, setIsContextMenu]);
+    }, [containerRef, setIsContextMenu]);
 
     // position the menu
     const contextMenuStyle: CSSProperties = {
@@ -35,10 +36,8 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
         left: xPosition - 80 // of the cursor
     }
 
-
     return (
         <div
-            ref={ref}
             className="context-menu"
             style={contextMenuStyle}
         >

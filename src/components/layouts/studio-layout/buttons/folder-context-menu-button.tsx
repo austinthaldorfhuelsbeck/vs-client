@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import { faEllipsisVertical, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
+import React, { Dispatch, MouseEvent, SetStateAction, useRef, useState } from "react";
 import { ContextMenu } from "../../../menus/context-menu";
 import { Folder } from "src/models/folder";
 import { ContextMenuListItem } from "src/components/menus/context-menu-li";
@@ -27,6 +27,9 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 	folders,
 	setFolders
 }) => {
+	// ref is for click outside
+	const ref = useRef<HTMLDivElement>(null);
+	
 	// menu display state
 	const [isContextMenu, setIsContextMenu] = useState<boolean>(false);
 	const [points, setPoints] = useState<Points>({
@@ -44,7 +47,7 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 	};
 	
 	return folder && (
-		<>
+		<div ref={ref} className="content-block__align-right">
 			<button
 				className="content-block__button"
 				onClick={onContextClick}
@@ -55,6 +58,7 @@ export const FolderContextMenuButton: React.FC<Props> = ({
         <ContextMenu
           xPosition={points.x}
           yPosition={points.y}
+					containerRef={ref}
 					setIsContextMenu={setIsContextMenu}
         >
 					<>
@@ -81,6 +85,6 @@ export const FolderContextMenuButton: React.FC<Props> = ({
 					</>
 				</ContextMenu>
       )}
-		</>
+		</div>
 	);
 };

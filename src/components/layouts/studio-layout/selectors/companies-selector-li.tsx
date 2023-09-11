@@ -26,7 +26,7 @@ export const CompaniesSelectorListItem: React.FC<Props> = ({
     >
       <span>{company.company_name}</span>
       &nbsp;&nbsp;
-      <NavLink to={`/studio/company/${company.company_id}/settings`}>
+      <NavLink to={`/studio/company/${company.company_id}`}>
         <FontAwesomeIcon icon={faGear} />
       </NavLink>
     </li>

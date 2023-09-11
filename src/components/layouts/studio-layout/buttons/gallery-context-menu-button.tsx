@@ -1,6 +1,6 @@
-import { faEllipsis, faFileImport, faPencil, faShareAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEllipsis, faFileImport, faPencil, faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState, MouseEvent, Dispatch, SetStateAction } from "react";
+import React, { useState, MouseEvent, Dispatch, SetStateAction, useRef } from "react";
 import { ContextMenu } from "../../../menus/context-menu";
 import { Gallery } from "src/models/gallery";
 import { ContextMenuListItem } from "src/components/menus/context-menu-li";
@@ -17,7 +17,7 @@ interface Points {
 };
 
 interface Props {
-	gallery: Gallery | null;
+	gallery: Gallery;
 	galleries: Array<Gallery | null>;
 	setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
 };
@@ -27,24 +27,38 @@ export const GalleryContextMenuButton: React.FC<Props> = ({
 	galleries,
 	setGalleries
 }) => {
+	// ref for click outside
+	const ref = useRef<HTMLDivElement>(null);
+
 	// menu display state
 	const [isContextMenu, setIsContextMenu] = useState<boolean>(false);
 	const [points, setPoints] = useState<Points>({
 		x: 0,
 		y: 0
 	});
+	const flipContextMenu = (currentState: boolean) => setIsContextMenu(!currentState);
 	
 	// event handler for context menu button
 	const onContextClick = (e: MouseEvent<HTMLButtonElement>) => {
-		setIsContextMenu((currentState) => !currentState);
+		e.preventDefault();
+		flipContextMenu(isContextMenu);
+		console.log("Button click. Context Menu: ", isContextMenu);
 		setPoints({
 			x: e.pageX,
 			y: e.pageY
 		});
 	};
+
+	const onCopyClick = (e: MouseEvent<HTMLButtonElement>) => {
+		const url: string = `https://galleries.vowsuite.com/${gallery.gallery_id}`;
+		e.preventDefault();
+		flipContextMenu(isContextMenu);
+		console.log("Copy click. Context Menu: ", isContextMenu);
+		navigator.clipboard.writeText(url);
+	};
 	
 	return gallery && (
-		<>
+		<div ref={ref} style={{ "display": "flex" }}>
 			<button
 				className="content-block__button"
 				onClick={onContextClick}
@@ -55,6 +69,7 @@ export const GalleryContextMenuButton: React.FC<Props> = ({
 				<ContextMenu
 					xPosition={points.x}
 					yPosition={points.y}
+					containerRef={ref}
 					setIsContextMenu={setIsContextMenu}
 				>
 					<>
@@ -80,7 +95,7 @@ export const GalleryContextMenuButton: React.FC<Props> = ({
 							/>
 						</MoveGalleryToFolderModal>
 						<ContextMenuListItem
-							onClick={(e: MouseEvent) => e.preventDefault()}
+							onClick={onCopyClick}
 							title="Copy Share Link"
 							icon={faShareAlt}
 						/>
@@ -96,6 +111,6 @@ export const GalleryContextMenuButton: React.FC<Props> = ({
 					</>
 				</ContextMenu>
 			)}
-		</>
+		</div>
 	);
 };

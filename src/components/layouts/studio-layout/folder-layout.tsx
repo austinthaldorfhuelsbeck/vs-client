@@ -41,7 +41,7 @@ export const FolderLayout: React.FC<Props> = ({
     };
 
     if (selectedFolder) getFolderResponse(selectedFolder.folder_id);
-  }, [getAccessTokenSilently, selectedFolder])
+  }, [getAccessTokenSilently, selectedFolder]);
 
   return selectedFolder && (
     <div className="content-block-layout__galleries">

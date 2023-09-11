@@ -26,16 +26,16 @@ export const FolderLayoutGallery: React.FC<Props> = ({
       )
    ) : "";
 
-  return (
+  return gallery && (
     <li className="card">
-      <Link to={`/studio/galleries/${gallery?.gallery_id}`}>
+      <Link to={`/studio/galleries/${gallery.gallery_id}`}>
         <img
-          src={gallery?.background_img_URL}
-          alt={gallery?.gallery_name}
+          src={gallery.background_img_URL}
+          alt={gallery.gallery_name}
           className="card__img"
         />
         <div className="card__headers-container">
-          <h4><strong>{gallery?.gallery_name}</strong></h4>
+          <h4><strong>{gallery.gallery_name}</strong></h4>
           <p>{`Updated - ${updatedDate}`}</p>
         </div>
       </Link>

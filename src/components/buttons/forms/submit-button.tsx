@@ -85,10 +85,13 @@ export const SubmitButton: React.FC<Props> = ({
   };
 
 	return (
-		<InlineButton
-			onClick={onSubmit}
-			icon={icon}
-			title={title}
-		/>
+		<>
+			<InlineButton
+				onClick={onSubmit}
+				icon={icon}
+				title={title}
+			/>
+		</>
+		
 	);
 };

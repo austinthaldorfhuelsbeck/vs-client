@@ -43,7 +43,7 @@
 .form-content__actions {
 	display: flex;
 	justify-content: flex-end;
-	padding: 0.5rem 0;
+	padding: 3rem 0rem 0rem 0rem;
 	margin-bottom: -1rem;
 }
 

@@ -19,7 +19,8 @@ export const FolderForm: React.FC<Props> = ({
   setFolders,
   folder
 }) => {
-  // form state
+  // initial state
+  const maxLength: number = 40;
   const initialFormData: BaseFolder = {
     "company_id": company_id,
     "folder_name": "",
@@ -48,10 +49,13 @@ export const FolderForm: React.FC<Props> = ({
         name="folder_name"
         title={folder ? "Folder" : "New Folder"}
         placeholder="Folder Name"
-        maxLength={40}
+        maxLength={maxLength}
         onChange={onChange}
         value={formData.folder_name}
       />
+      <div className="form-content__subscript-container">
+        {`${formData.folder_name.length}/${maxLength}`}
+      </div>
       <div className="form-content__actions">
         <SubmitButton
           closeModal={closeModal}

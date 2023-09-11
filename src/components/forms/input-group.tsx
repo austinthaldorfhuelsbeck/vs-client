@@ -37,9 +37,6 @@ export const InputGroup: React.FC<Props> = ({
           />
         </div>
         <hr className="form-content__underline"/>
-        <div className="form-content__subscript-container">
-          {`${value.length}/${maxLength}`}
-        </div>
       </div>
     </div>
   )
