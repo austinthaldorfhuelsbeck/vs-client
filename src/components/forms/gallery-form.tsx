@@ -4,7 +4,7 @@ import { InputGroup } from "./input-group";
 import { createGallery, updateGallery } from "src/services/galleries.service";
 import { CancelButton } from "../buttons/forms/cancel-button";
 import { SubmitButton } from "../buttons/forms/submit-button";
-import { getGalleriesByFolderID } from "src/services/folders.service";
+import { getGalleriesByFolderID } from "src/services/galleries.service"; 
 
 interface Props {
   folder_id: number;
@@ -36,6 +36,7 @@ export const GalleryForm: React.FC<Props> = ({
     });
   };
 
+  // return form
   return (
     <form className="form-content__form-container">
       <CancelButton
@@ -54,19 +55,19 @@ export const GalleryForm: React.FC<Props> = ({
       />
       <div className="form-content__actions">
         <SubmitButton
-            closeModal={closeModal}
-            formData={formData}
-            setFormData={setFormData}
-            id={gallery?.gallery_id}
-            cleanup_id={folder_id}
-            setItems={setGalleries}
-            itemService={gallery ? updateGallery : createGallery}
-            cleanupService={getGalleriesByFolderID}
-            initialFormData={initialFormData}
-            icon={null}
-            title={gallery ? "Rename Gallery" : "Create Gallery"}
+          closeModal={closeModal}
+          formData={formData}
+          setFormData={setFormData}
+          id={gallery?.gallery_id}
+          cleanup_id={folder_id}
+          setItems={setGalleries}
+          itemService={gallery ? updateGallery : createGallery}
+          cleanupService={getGalleriesByFolderID}
+          initialFormData={initialFormData}
+          icon={null}
+          title={gallery ? "Rename Gallery" : "Create Gallery"}
           />
       </div>
     </form>
-  )
+  );
 };

@@ -92,12 +92,12 @@ export const deleteFolder = async (
   };
 };
 
-export const getGalleriesByFolderID = async (
+export const getCompaniesByUserID = async (
   accessToken: string,
   id: number
 ): Promise<ApiResponse> => {
   const config: AxiosRequestConfig = {
-    url: `${apiServerURL}/folders/${id}/galleries`,
+    url: `${apiServerURL}/users/${id}/companies`,
     method: "GET",
     headers: {
       "content-type": "application/json",

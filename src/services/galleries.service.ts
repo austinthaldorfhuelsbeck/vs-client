@@ -70,3 +70,24 @@ export const deleteGallery = async (
     error
   };
 };
+
+export const getGalleriesByFolderID = async (
+  accessToken: string,
+  id: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerURL}/folders/${id}/galleries`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+
+  return {
+    data,
+    error
+  };
+};

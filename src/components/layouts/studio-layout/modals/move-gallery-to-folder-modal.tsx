@@ -1,19 +1,17 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { StudioModal } from "../../../modals/studio-modal";
-import { GalleryForm } from "src/components/forms/gallery-form";
 import { Gallery } from "src/models/gallery";
+import { MoveGalleryToFolderForm } from "../forms/move-gallery-to-folder-form";
 
 interface Props {
-  folder_id: number;
-  setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
 	gallery: Gallery | null;
+  setGalleries: Dispatch<SetStateAction<Array<Gallery | null>>>;
 	children: JSX.Element;
 };
 
-export const GalleryStudioModal: React.FC<Props> = ({
-	folder_id,
-	setGalleries,
+export const MoveGalleryToFolderModal: React.FC<Props> = ({
 	gallery,
+	setGalleries,
 	children
 }) => {
 	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
@@ -22,23 +20,19 @@ export const GalleryStudioModal: React.FC<Props> = ({
 	const openModal = () => setModalIsOpen(true);
 	const closeModal = () => setModalIsOpen(false);
 	
-	return (
+	return gallery  && (
 			<>
-				<div
-					// style={{ "display": "inline-grid" }}
-					onClick={openModal}
-				>
+				<div onClick={openModal}>
 					{children}
 				</div>
 				<StudioModal
 					isOpen={modalIsOpen}
 					closeModal={closeModal}
 				>
-					<GalleryForm
-						folder_id={folder_id}
-						closeModal={closeModal}
-						setGalleries={setGalleries}
+					<MoveGalleryToFolderForm
 						gallery={gallery}
+						setGalleries={setGalleries}
+						closeModal={closeModal}
 					/>
 				</StudioModal>
 			</>

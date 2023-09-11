@@ -1,4 +1,4 @@
-import { faEllipsis, faFileImport, faPencil, faShareAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faFileImport, faPencil, faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, MouseEvent, Dispatch, SetStateAction } from "react";
 import { ContextMenu } from "../../../menus/context-menu";
@@ -7,7 +7,8 @@ import { ContextMenuListItem } from "src/components/menus/context-menu-li";
 import { DeleteButton } from "./delete-button";
 import { GalleryStudioModal } from "../modals/gallery-studio-modal";
 import { deleteGallery } from "src/services/galleries.service";
-import { getGalleriesByFolderID } from "src/services/folders.service";
+import { getGalleriesByFolderID } from "src/services/galleries.service";
+import { MoveGalleryToFolderModal } from "../modals/move-gallery-to-folder-modal";
 
 // mouse coordinates
 interface Points {
@@ -68,6 +69,21 @@ export const GalleryContextMenuButton: React.FC<Props> = ({
 								icon={faPencil}
 							/>
 						</GalleryStudioModal>
+						<MoveGalleryToFolderModal
+							gallery={gallery}
+							setGalleries={setGalleries}
+						>
+							<ContextMenuListItem
+								onClick={(e: MouseEvent) => e.preventDefault()}
+								title="Move to Folder"
+								icon={faFileImport}
+							/>
+						</MoveGalleryToFolderModal>
+						<ContextMenuListItem
+							onClick={(e: MouseEvent) => e.preventDefault()}
+							title="Copy Share Link"
+							icon={faShareAlt}
+						/>
 						<DeleteButton
 							item={gallery}
 							id={gallery.gallery_id}
