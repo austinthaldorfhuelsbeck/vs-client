@@ -21,7 +21,7 @@
   /* responsive */
 
   height: 80px;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 
   padding: 0 24px;
   margin: 0;
@@ -38,6 +38,11 @@
   margin-right: 64px;
 }
 
+.nav-bar__profile-img {
+  width: 50px;
+  border-radius: 100%;
+}
+
 .nav-bar__link {
   display: flex;
   align-items: center;
@@ -46,7 +51,8 @@
 }
 
 .nav-bar__logo {
-  height: 3.2rem;
+  color: white;
+  margin-top: 1.6rem;
 }
 
 .nav-bar__tabs {
@@ -59,13 +65,14 @@
 .nav-bar__tab {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-
+  justify-content: left;
+  cursor: pointer;
   margin-right: 24px;
-
   font-weight: 500;
-  font-size: 16px;
+  color: rgb(206, 206, 206);
+  font-size: 14px;
   line-height: 16px;
+  list-style-type: none;
 }
 
 .nav-bar__tab:last-child {
@@ -76,10 +83,11 @@
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-color: var(--indigo);
+  list-style-type: none;
 
   /* responsive */
 
-  text-decoration-thickness: 4px;
+  text-decoration-thickness: 2px;
   text-underline-offset: 8px;
 }
 

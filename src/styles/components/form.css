@@ -1,0 +1,59 @@
+.form-content {
+	margin: 0 -2rem;
+	padding: 0 2.2rem;
+	overflow: auto;
+}
+
+.form-content h3 {
+	margin-top: 0.5rem;
+}
+
+.form-content__field-container {
+	padding-bottom: 1.25rem;
+}
+
+.form-content__form-container {
+	position: relative;
+}
+
+.form-content__field {
+	padding: 0.5rem 0;
+	border-top: 1rem solid transparent;
+}
+
+.form-content__input {
+	font: inherit;
+	background: transparent !important;
+	color: var(--white);
+	border: none;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	max-width: 100%;
+	vertical-align: bottom;
+}
+
+.form-content__subscript-container {
+	font-size: 75%;
+	color: var(--white);
+	text-align: right;
+}
+
+.form-content__actions {
+	display: flex;
+	justify-content: flex-end;
+	padding: 3rem 0rem 0rem 0rem;
+	margin-bottom: -1rem;
+}
+
+.form-content__cancel-button {
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 150%;
+	text-align: right;
+
+	cursor: pointer;
+
+	position: absolute;
+	left: 95%;
+}

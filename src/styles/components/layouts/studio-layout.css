@@ -1,0 +1,38 @@
+.studio-layout {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  width: 100%;
+  /* min-height: 640px; */
+
+  /* responsive */
+
+  padding: 10px;
+}
+
+.studio-layout h1, h2, h3, h4 {
+  color: var(--white);
+}
+
+.studio-layout h5, h6, p {
+  color: hsla(0, 0%, 100%, 0.7);
+}
+
+.studio-layout ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.studio-layout__container {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  padding-top: 1rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .studio-layout {
+    padding: 1.6rem;
+  }
+}
