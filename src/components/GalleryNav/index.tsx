@@ -48,16 +48,18 @@ export const GalleryNav: React.FC<Props> = ({ user, gallery }) => {
 		copyText(url);
 	};
 
-	const downloadVideo = async (video: IVideo) => {
+	const downloadVideo = async (video: Partial<IVideo>) => {
 		// update downloads count
-		await addDownload(video._id);
+		if (video._id) await addDownload(video._id);
 
 		// anchor link
 		const element: HTMLAnchorElement = document.createElement("a");
-		element.href = video.video;
-		const fileName: string =
-			String(gallery.name) + "_" + video.video.slice(-4);
-		element.download = fileName;
+		if (video.video) {
+			element.href = video.video;
+			const fileName: string =
+				String(gallery.name) + "_" + video.video.slice(-4);
+			element.download = fileName;
+		}
 
 		// simulate link click
 		document.body.appendChild(element);
@@ -105,7 +107,7 @@ export const GalleryNav: React.FC<Props> = ({ user, gallery }) => {
 				<DownloadContainer>
 					<AltSubheader>Downloads</AltSubheader>
 					<hr />
-					{gallery.videos.map((video: IVideo) => (
+					{gallery.videos.map((video: Partial<IVideo>) => (
 						<InlineButton
 							$secondary
 							key={video._id}

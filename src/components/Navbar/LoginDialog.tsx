@@ -60,11 +60,12 @@ const LoginDialog: React.FC<Props> = ({
 							Cancel
 						</InlineButton>
 						<InlineButton type="submit" $primary>
-							Save
+							Login
 						</InlineButton>
 					</Buttons>
 				</FormColumn>
 			</form>
+
 			{loginError && (
 				<Alert $error={loginError}>{loginError.message}</Alert>
 			)}

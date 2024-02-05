@@ -44,11 +44,13 @@ const useUploadReducer = () => {
 			if (currentGallery && currentGallery.videos) {
 				setCurrentGallery((prevGallery) => {
 					if (prevGallery) {
-						const updatedVideos = prevGallery.videos.map((video) =>
-							video._id === currentVideo._id
-								? { ...video, ...data }
-								: video,
-						);
+						const updatedVideos = prevGallery.videos
+							? prevGallery.videos.map((video) =>
+									video._id === currentVideo._id
+										? { ...video, ...data }
+										: video,
+							  )
+							: [data];
 
 						return {
 							...prevGallery,

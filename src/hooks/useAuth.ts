@@ -7,15 +7,17 @@ import { IUser } from "../interfaces/models.interface";
 import { login, logout } from "../middleware/auth.api";
 import useStatus from "./useStatus";
 
-const useAuth = () => {
+interface Props {
+	toggle: (e: any) => void;
+}
+const useAuth = ({ toggle }: Props) => {
 	// context
 	const { setCurrentUser } = useUser();
 
 	// hooks
 	const navigate = useNavigate();
 	// error/ success status hook
-	const { success, error, handleSuccess, handleError, clearStatus } =
-		useStatus();
+	const { success, error, handleError } = useStatus();
 
 	// cookie handling
 	const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -40,8 +42,7 @@ const useAuth = () => {
 		const res: IApiResponse = await login(loginData);
 		if (res.data) {
 			setCurrentUser(res.data);
-			handleSuccess(`Successfully logged in user ${res.data._id}`);
-			clearStatus();
+			toggle(e);
 			setCookie("user", res.data._id, { path: "/" });
 			navigate("/studio");
 		} else if (res.error) handleError(res.error);

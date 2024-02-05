@@ -42,7 +42,7 @@ const BrandDetails: React.FC<Props> = ({ user }) => {
 			{user.social && (
 				<>
 					<Link
-						to={user.social.website}
+						to={user.social.website || ""}
 						target="_blank"
 						rel="noopener noreferrer"
 					>

@@ -27,9 +27,9 @@ interface Props {
 const Navbar: FC<Props> = ({ toggleTheme, isDarkMode }) => {
 	const { currentUser } = useUser();
 	const { setCurrentGallery } = useGallery();
-	const auth = useAuth();
 	const loginModal = useModal();
 	const userModal = useModal();
+	const auth = useAuth({ toggle: loginModal.toggle });
 
 	return (
 		<Container>

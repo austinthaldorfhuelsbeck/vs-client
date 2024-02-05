@@ -55,8 +55,11 @@ const Sidebar: React.FC<SidebarProps> = () => {
 				<ul>
 					{currentUser.galleries
 						.filter((gallery) => gallery)
-						.map((gallery: IGallery) => (
-							<SidebarItem key={gallery._id} gallery={gallery} />
+						.map((gallery: Partial<IGallery>) => (
+							<SidebarItem
+								key={gallery._id}
+								gallery={gallery as IGallery}
+							/>
 						))}
 				</ul>
 			)}

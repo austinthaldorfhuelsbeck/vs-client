@@ -16,8 +16,8 @@ export interface IUser extends ITimestamps {
 	tertiaryColor: string;
 	primaryFont: string;
 	secondaryFont: string;
-	galleries: IGallery[];
-	social?: ISocial;
+	galleries: Partial<IGallery>[];
+	social?: Partial<ISocial>;
 }
 
 export interface IGallery extends ITimestamps {
@@ -25,7 +25,7 @@ export interface IGallery extends ITimestamps {
 	userId: string;
 	name: string;
 	img: string;
-	videos: IVideo[];
+	videos: Partial<IVideo>[];
 }
 
 export interface IVideo extends ITimestamps {

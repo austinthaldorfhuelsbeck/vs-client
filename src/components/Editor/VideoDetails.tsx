@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { Link } from "react-router-dom";
 import { useVideo } from "../../context/contextProvider";
 import useUploadReducer from "../../context/useUploadReducer";
 import useUpload, { UploadConfig } from "../../hooks/useUpload";
@@ -26,7 +27,7 @@ import {
 	UploadButton,
 } from "./Editor.style";
 
-const VideoDetails: React.FC<{ currentVideo?: IVideo }> = () => {
+const VideoDetails: React.FC = () => {
 	const { currentVideo } = useVideo();
 
 	const { videoReducer } = useUploadReducer();
@@ -90,9 +91,15 @@ const VideoDetails: React.FC<{ currentVideo?: IVideo }> = () => {
 			)}
 			{(percent === 0 || percent === 100) && (
 				<Controls>
-					<InlineButton>
-						<FontAwesomeIcon icon={faShareAlt} /> Share & Embed
-					</InlineButton>
+					<Link
+						to={`/galleries/${currentVideo?.galleryId}`}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<InlineButton $secondary>
+							<FontAwesomeIcon icon={faShareAlt} /> View Gallery
+						</InlineButton>
+					</Link>
 					<UploadButton>
 						<input
 							id="video-replace-upload"
