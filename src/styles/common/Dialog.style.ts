@@ -7,6 +7,8 @@ export const Dialog = styled.dialog`
 	border-width: 0;
 	padding: 0;
 	min-width: 400px;
+	max-width: 80vw;
+	max-height: 90vh;
 	border-radius: 10px;
 	cursor: default;
 
