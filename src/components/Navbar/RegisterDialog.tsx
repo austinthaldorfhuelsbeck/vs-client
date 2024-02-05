@@ -16,26 +16,26 @@ import TextInput from "../InputGroups/TextInput";
 interface Props {
 	formData: any; // Replace 'any' with the actual login data type
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onLogin: (e: React.FormEvent) => void;
+	onRegister: (e: React.FormEvent) => void;
 	loginSuccess: string | null;
 	loginError: any; // Replace 'any' with the actual error type
 	loginModal: any; // Replace 'any' with the actual modal type
 }
 
-const LoginDialog: React.FC<Props> = ({
+const RegisterDialog: React.FC<Props> = ({
 	formData,
 	onChange,
-	onLogin,
+	onRegister,
 	loginSuccess,
 	loginError,
 	loginModal,
 }) => (
 	<Dialog ref={loginModal.modalRef} onClick={loginModal.onBackgroundClick}>
 		<FormRow>
-			<FormHeader>Login to Vowsuite</FormHeader>
+			<FormHeader>Sign Up for Vowsuite</FormHeader>
 			<CloseButton onClick={loginModal.toggle} icon={faX} />
 		</FormRow>
-		<form noValidate autoComplete="off" onSubmit={onLogin}>
+		<form noValidate autoComplete="off" onSubmit={onRegister}>
 			<FormColumn>
 				<TextInput
 					name="email"
@@ -56,7 +56,7 @@ const LoginDialog: React.FC<Props> = ({
 						Cancel
 					</InlineButton>
 					<InlineButton type="submit" $primary>
-						Login
+						Submit
 					</InlineButton>
 				</Buttons>
 			</FormColumn>
@@ -67,5 +67,4 @@ const LoginDialog: React.FC<Props> = ({
 	</Dialog>
 );
 
-
-export default LoginDialog;
+export default RegisterDialog;

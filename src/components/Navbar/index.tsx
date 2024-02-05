@@ -17,6 +17,7 @@ import {
 	LogoLink,
 } from "./Navbar.style";
 import ProfileSection from "./ProfileSection";
+import RegisterDialog from "./RegisterDialog";
 import UserEditDialog from "./UserEditDialog";
 
 interface Props {
@@ -28,8 +29,10 @@ const Navbar: FC<Props> = ({ toggleTheme, isDarkMode }) => {
 	const { currentUser } = useUser();
 	const { setCurrentGallery } = useGallery();
 	const loginModal = useModal();
+	const registerModal = useModal();
 	const userModal = useModal();
-	const auth = useAuth({ toggle: loginModal.toggle });
+	const loginAuth = useAuth({ toggle: loginModal.toggle });
+	const registerAuth = useAuth({ toggle: registerModal.toggle });
 
 	return (
 		<Container>
@@ -52,23 +55,37 @@ const Navbar: FC<Props> = ({ toggleTheme, isDarkMode }) => {
 			<Icon onClick={toggleTheme} icon={isDarkMode ? faSun : faMoon} />
 
 			{!currentUser && (
-				<Button onClick={loginModal.toggle}>Log In</Button>
+				<>
+					<Button onClick={registerModal.toggle}>Sign Up</Button>
+					<Button $secondary onClick={loginModal.toggle}>
+						Log In
+					</Button>
+				</>
 			)}
 
 			{currentUser && (
 				<ProfileSection
 					toggleModal={userModal.toggle}
-					onLogout={auth.onLogout}
+					onLogout={loginAuth.onLogout}
 				/>
 			)}
 
 			<LoginDialog
-				loginData={auth.loginData}
-				onLoginChange={auth.onLoginChange}
-				onLogin={auth.onLogin}
-				loginSuccess={auth.loginSuccess}
-				loginError={auth.loginError}
+				formData={loginAuth.formData}
+				onChange={loginAuth.onChange}
+				onLogin={loginAuth.onLogin}
+				loginSuccess={loginAuth.loginSuccess}
+				loginError={loginAuth.loginError}
 				loginModal={loginModal}
+			/>
+
+			<RegisterDialog
+				formData={registerAuth.formData}
+				onChange={registerAuth.onChange}
+				onRegister={registerAuth.onRegister}
+				loginSuccess={registerAuth.loginSuccess}
+				loginError={registerAuth.loginError}
+				loginModal={registerModal}
 			/>
 
 			<UserEditDialog userModal={userModal} />

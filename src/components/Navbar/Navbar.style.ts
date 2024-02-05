@@ -45,10 +45,14 @@ export const Logo = styled.h1`
 	font-size: 22px;
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+	$secondary?: boolean;
+}
+export const Button = styled.button<ButtonProps>`
 	min-width: 8.4rem;
 	border: 1px solid ${({ theme }) => theme.indigo};
-	background: ${({ theme }) => theme.indigo};
+	background-color: ${(props) =>
+		props.$secondary ? "transparent" : "#635dff"};
 	color: white;
 	font-size: 1.6rem;
 	margin: 10px;

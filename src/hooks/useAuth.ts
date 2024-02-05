@@ -2,9 +2,8 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/contextProvider";
-import { IApiResponse } from "../interfaces/api.interface";
 import { IUser } from "../interfaces/models.interface";
-import { login, logout } from "../middleware/auth.api";
+import { login, logout, register } from "../middleware/auth.api";
 import useStatus from "./useStatus";
 
 interface Props {
@@ -23,32 +22,42 @@ const useAuth = ({ toggle }: Props) => {
 	const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
 	// state for login form
-	const [loginData, setLoginData] = useState<Partial<IUser>>({
+	const [formData, setFormData] = useState<Partial<IUser>>({
 		email: "",
 		password: "",
 	});
 
 	// handlers for login/logout
-	const onLoginChange = (
-		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-	) => {
-		setLoginData((prev) => {
+	const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		setFormData((prev) => {
 			const { name, value } = e.target;
 			return { ...prev, [name]: value };
 		});
 	};
 	const onLogin = async (e: FormEvent) => {
 		e.preventDefault();
-		const res: IApiResponse = await login(loginData);
+		const res = await login(formData);
 		if (res.data) {
 			setCurrentUser(res.data);
 			toggle(e);
 			setCookie("user", res.data._id, { path: "/" });
 			navigate("/studio");
-		} else if (res.error) handleError(res.error);
+		}
+		if (res.error) handleError(res.error);
+	};
+	const onRegister = async (e: FormEvent) => {
+		e.preventDefault();
+		const res = await register(formData);
+		if (res.data) {
+			setCurrentUser(res.data);
+			toggle(e);
+			setCookie("user", res.data._id, { path: "/" });
+			navigate("/studio");
+		}
+		if (res.error) handleError(res.error);
 	};
 	const onLogout = async () => {
-		const res: IApiResponse = await logout();
+		const res = await logout();
 		if (res.error) {
 			handleError(res.error);
 		} else {
@@ -60,9 +69,10 @@ const useAuth = ({ toggle }: Props) => {
 
 	return {
 		cookies,
-		loginData,
-		onLoginChange,
+		formData,
+		onChange,
 		onLogin,
+		onRegister,
 		onLogout,
 		loginSuccess: success,
 		loginError: error,
