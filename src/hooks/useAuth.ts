@@ -47,14 +47,18 @@ const useAuth = ({ toggle }: Props) => {
 	};
 	const onRegister = async (e: FormEvent) => {
 		e.preventDefault();
-		const res = await register(formData);
-		if (res.data) {
-			setCurrentUser(res.data);
-			toggle(e);
-			setCookie("user", res.data._id, { path: "/" });
-			navigate("/studio");
+		const registerRes = await register(formData);
+		if (registerRes.error) handleError(registerRes.error);
+		if (registerRes.data) {
+			const loginRes = await login(formData);
+			if (loginRes.error) handleError(loginRes.error);
+			if (loginRes) {
+				setCurrentUser(loginRes.data);
+				toggle(e);
+				setCookie("user", loginRes.data._id, { path: "/" });
+				navigate("/studio");
+			}
 		}
-		if (res.error) handleError(res.error);
 	};
 	const onLogout = async () => {
 		const res = await logout();

@@ -59,7 +59,7 @@ const Branding: React.FC = () => {
 				Choose Colors:
 			</FormSubheader>
 			<Row>
-				<>
+				<FormColumn>
 					<Label htmlFor="primaryColor">Accent</Label>
 					<Input
 						type="color"
@@ -67,8 +67,8 @@ const Branding: React.FC = () => {
 						value={formData.primaryColor}
 						onChange={onChange}
 					/>
-				</>
-				<>
+				</FormColumn>
+				<FormColumn>
 					<Label htmlFor="secondaryColor">Menu Text</Label>
 					<Input
 						type="color"
@@ -76,8 +76,8 @@ const Branding: React.FC = () => {
 						value={formData.secondaryColor}
 						onChange={onChange}
 					/>
-				</>
-				<>
+				</FormColumn>
+				<FormColumn>
 					<Label htmlFor="tertiaryColor">Menu Background</Label>
 					<Input
 						type="color"
@@ -85,7 +85,7 @@ const Branding: React.FC = () => {
 						value={formData.tertiaryColor}
 						onChange={onChange}
 					/>
-				</>
+				</FormColumn>
 			</Row>
 
 			<Buttons>

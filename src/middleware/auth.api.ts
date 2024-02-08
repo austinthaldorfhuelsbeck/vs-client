@@ -16,7 +16,7 @@ export const login = async (cred: Partial<IUser>): Promise<IApiResponse> => {
 export const register = async (cred: Partial<IUser>): Promise<IApiResponse> => {
 	const config: AxiosRequestConfig = {
 		method: "POST",
-		url: "/api/vi/auth/register",
+		url: "/api/v1/auth/register",
 		data: cred,
 	};
 	return (await callExternalApi(config)) as IApiResponse;
