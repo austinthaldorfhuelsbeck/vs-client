@@ -1,6 +1,9 @@
 {
 	"name": "vowsuite-client",
 	"version": "2.0.0",
+	"engines": {
+		"node": "20.x"
+	},
 	"private": true,
 	"dependencies": {
 		"@firebase/storage": "^0.12.1",
