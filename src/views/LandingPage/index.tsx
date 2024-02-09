@@ -6,7 +6,7 @@ const HeroBanner: React.FC = () => {
 	return (
 		<Container>
 			<Headline>Deliver videos with Vowsuite</Headline>
-			<Description>It's the best for delivering videos.</Description>
+			<Description>Login with the username test@test.com and password 123456</Description>
 		</Container>
 	);
 };
