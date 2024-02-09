@@ -47,6 +47,7 @@ const ContextProvider: React.FC<PropsWithChildren<ComponentProps>> = ({
 		} else if (!currentUser && cookies["user"] !== "undefined") {
 			load(cookies["user"]);
 		}
+		console.log("User: ", currentUser)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
