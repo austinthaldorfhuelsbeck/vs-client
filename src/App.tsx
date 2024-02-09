@@ -1,4 +1,3 @@
-// App.tsx
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useRoutes } from "react-router-dom";
