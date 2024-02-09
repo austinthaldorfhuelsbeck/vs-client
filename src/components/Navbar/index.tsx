@@ -54,20 +54,18 @@ const Navbar: FC<Props> = ({ toggleTheme, isDarkMode }) => {
 
 			<Icon onClick={toggleTheme} icon={isDarkMode ? faSun : faMoon} />
 
-			{!currentUser && (
+			{currentUser ? (
+				<ProfileSection
+					toggleModal={userModal.toggle}
+					onLogout={loginAuth.onLogout}
+				/>
+			) : (
 				<>
 					<Button onClick={registerModal.toggle}>Sign Up</Button>
 					<Button $secondary onClick={loginModal.toggle}>
 						Log In
 					</Button>
 				</>
-			)}
-
-			{currentUser && (
-				<ProfileSection
-					toggleModal={userModal.toggle}
-					onLogout={loginAuth.onLogout}
-				/>
 			)}
 
 			<LoginDialog
