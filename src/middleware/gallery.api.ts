@@ -1,12 +1,14 @@
 import { AxiosRequestConfig } from "axios";
 
-import { callExternalApi } from "./external.api";
-import { IGallery } from "../interfaces/models.interface";
 import { IApiResponse } from "../interfaces/api.interface";
+import { IGallery } from "../interfaces/models.interface";
+import { callExternalApi } from "./external.api";
+
+const baseUrl = process.env.REACT_APP_BASE_API_URL || "";
 
 export const fetchGallery = async (id: string): Promise<IApiResponse> => {
 	const config: AxiosRequestConfig = {
-		url: `/api/v1/galleries/${id}`,
+		url: `${baseUrl}/api/v1/galleries/${id}`,
 		method: "GET",
 	};
 	return (await callExternalApi(config)) as IApiResponse;
@@ -14,7 +16,7 @@ export const fetchGallery = async (id: string): Promise<IApiResponse> => {
 
 export const fetchGalleries = async (userId: string): Promise<IApiResponse> => {
 	const config: AxiosRequestConfig = {
-		url: "/api/v1/galleries",
+		url: `${baseUrl}/api/v1/galleries`,
 		method: "GET",
 	};
 	return (await callExternalApi(config)) as IApiResponse;
@@ -24,7 +26,7 @@ export const createGallery = async (
 	gallery: Partial<IGallery>,
 ): Promise<IApiResponse> => {
 	const config: AxiosRequestConfig = {
-		url: "/api/v1/galleries",
+		url: `${baseUrl}/api/v1/galleries`,
 		method: "POST",
 		data: gallery,
 	};
@@ -36,7 +38,7 @@ export const updateGallery = async (
 	gallery: Partial<IGallery>,
 ): Promise<IApiResponse> => {
 	const config: AxiosRequestConfig = {
-		url: `/api/v1/galleries/${id}`,
+		url: `${baseUrl}/api/v1/galleries/${id}`,
 		method: "PUT",
 		data: gallery,
 	};
@@ -45,7 +47,7 @@ export const updateGallery = async (
 
 export const deleteGallery = async (id: string): Promise<IApiResponse> => {
 	const config: AxiosRequestConfig = {
-		url: `/api/v1/galleries/${id}`,
+		url: `${baseUrl}/api/v1/galleries/${id}`,
 		method: "DELETE",
 	};
 	return (await callExternalApi(config)) as IApiResponse;

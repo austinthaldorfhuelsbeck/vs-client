@@ -44,6 +44,12 @@ const RegisterDialog: React.FC<Props> = ({
 					onChange={onChange}
 				/>
 				<TextInput
+					name="name"
+					label="Name*"
+					value={formData.name}
+					onChange={onChange}
+				/>
+				<TextInput
 					password
 					name="password"
 					label="Password*"
