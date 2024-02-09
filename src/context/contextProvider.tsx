@@ -39,7 +39,6 @@ const ContextProvider: React.FC<PropsWithChildren<ComponentProps>> = ({
 		const load = async (id: string) => {
 			const res = await fetchUser(id);
 			if (res.data) setCurrentUser(res.data);
-			if (res.error) setCurrentUser(undefined);
 		};
 
 		if (currentUser && cookies["user"] === "undefined") {
@@ -47,7 +46,6 @@ const ContextProvider: React.FC<PropsWithChildren<ComponentProps>> = ({
 		} else if (!currentUser && cookies["user"] !== "undefined") {
 			load(cookies["user"]);
 		}
-		console.log("User: ", currentUser)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
