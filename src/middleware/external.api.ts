@@ -14,7 +14,7 @@ export const callExternalApi = async (
 		"content-type": "application/json",
 	};
 	try {
-		const response: AxiosResponse = await axios({ ...config, headers });
+		const response: AxiosResponse = await axios({ ...config, headers, withCredentials: true });
 		const { data } = response;
 
 		return {
