@@ -38,7 +38,11 @@ const ContextProvider: React.FC<PropsWithChildren<ComponentProps>> = ({
 	useEffect(() => {
 		const load = async (id: string) => {
 			const res = await fetchUser(id);
-			if (res.data) setCurrentUser(res.data);
+			if (res.data) {
+				setCurrentUser(res.data);
+			} else if (res.error) {
+				setCurrentUser(undefined);
+			}
 		};
 
 		if (currentUser && cookies["user"] === "undefined") {
