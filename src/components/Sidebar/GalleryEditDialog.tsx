@@ -10,10 +10,10 @@ import useUpload, { UploadConfig } from "../../hooks/useUpload";
 import { IGallery } from "../../interfaces/models.interface";
 import { updateGallery } from "../../middleware/gallery.api";
 import {
-	Alert,
-	CloseButton,
-	Dialog,
-	InlineButton,
+  Alert,
+  CloseButton,
+  Dialog,
+  InlineButton,
 } from "../../styles/common/common.style";
 import { Buttons, FormHeader, FormRow } from "../../styles/forms.style";
 import { Label, ListItem } from "../ContextMenu/ContextMenu.style";

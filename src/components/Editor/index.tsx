@@ -12,13 +12,13 @@ import { Alert, CloseButton } from "../../styles/common/common.style";
 import { FormHeader, FormRow } from "../../styles/forms.style";
 import TextInput from "../InputGroups/TextInput";
 import {
-	Button,
-	Container,
-	ContentWrapper,
-	FormWrapper,
-	Hr,
-	Thumbnail,
-	UploadButton,
+  Button,
+  Container,
+  ContentWrapper,
+  FormWrapper,
+  Hr,
+  Thumbnail,
+  UploadButton,
 } from "./Editor.style";
 import VideoDetails from "./VideoDetails";
 
