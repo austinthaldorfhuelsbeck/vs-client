@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { IGallery, IUser, IVideo } from "../interfaces/models.interface";
-import { fetchUser } from "../middleware/user.api";
+import { fetchUserByEmail } from "../middleware/user.api";
 import {
   GalleryContext,
   UserContext,
@@ -31,7 +31,7 @@ const ContextProvider: React.FC<PropsWithChildren<ComponentProps>> = ({
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await fetchUser("test@test.co");
+      const user = await fetchUserByEmail("test@test.co");
       console.log("loading user", user.data);
       if (user.data) setCurrentUser(user.data);
     };

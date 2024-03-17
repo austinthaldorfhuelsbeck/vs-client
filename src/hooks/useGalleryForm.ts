@@ -44,7 +44,10 @@ const useGalleryForm = () => {
 			}
 		} else {
 			// create gallery on db
-			const res: IApiResponse = await createGallery(formData);
+			const res: IApiResponse = await createGallery({
+        ...formData,
+        userId: currentUser?._id,
+      });
 			// update context and set alert
 			if (res.error) handleError(res.error);
 			if (res.data && currentUser?.galleries) {

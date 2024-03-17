@@ -22,10 +22,7 @@ const Navbar: FC<Props> = ({ toggleTheme, isDarkMode }) => {
 
   return (
     <Container>
-      <LogoLink
-        onClick={() => setCurrentGallery(undefined)}
-        to={currentUser ? "/studio" : "/"}
-      >
+      <LogoLink onClick={() => setCurrentGallery(undefined)} to="/">
         <Logo>Vowsuite</Logo>
       </LogoLink>
 

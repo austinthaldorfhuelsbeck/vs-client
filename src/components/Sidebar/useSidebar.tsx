@@ -62,7 +62,10 @@ const useSidebar = (gallery?: IGallery) => {
           setCurrentUser((prev) => {
             return prev && { ...prev, galleries: res.data };
           });
-        if (!currentGallery && res.data?.[0]) setCurrentGallery(res.data[0]);
+        if (!currentGallery && res.data?.[0]) {
+          const singleGalleryRes = await fetchGallery(res.data[0]._id);
+          if (singleGalleryRes.data) setCurrentGallery(singleGalleryRes.data);
+        }
       } catch (error) {
         console.error(error);
       }
