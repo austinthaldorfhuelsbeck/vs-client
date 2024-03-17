@@ -1,16 +1,16 @@
 import axios, {
-	AxiosError,
-	AxiosRequestConfig,
-	AxiosResponse,
-	isAxiosError,
-	RawAxiosRequestHeaders,
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosResponse,
+  isAxiosError,
+  RawAxiosRequestHeaders,
 } from "axios";
 import { IApiResponse, IAppError } from "../interfaces/api.interface";
 
 export const callExternalApi = async (
-	config: AxiosRequestConfig,
+  config: AxiosRequestConfig
 ): Promise<IApiResponse> => {
-	const headers: RawAxiosRequestHeaders = {
+  const headers: RawAxiosRequestHeaders = {
     "content-type": "application/json",
   };
   try {
@@ -18,7 +18,7 @@ export const callExternalApi = async (
     const { data } = response;
 
     return {
-      data,
+      data: data.data,
       error: null,
     };
   } catch (error) {

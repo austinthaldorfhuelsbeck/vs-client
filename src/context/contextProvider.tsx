@@ -32,6 +32,7 @@ const ContextProvider: React.FC<PropsWithChildren<ComponentProps>> = ({
   useEffect(() => {
     const loadUser = async () => {
       const user = await fetchUser("test@test.co");
+      console.log("loading user", user.data);
       if (user.data) setCurrentUser(user.data);
     };
     if (!currentUser) loadUser();

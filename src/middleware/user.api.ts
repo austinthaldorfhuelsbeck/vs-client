@@ -14,33 +14,14 @@ export const fetchUser = async (email: string): Promise<IApiResponse> => {
   return (await callExternalApi(config)) as IApiResponse;
 };
 
-export const createUser = async (
-	user: Partial<IUser>,
-): Promise<IApiResponse> => {
-	const config: AxiosRequestConfig = {
-		url: `${baseUrl}/api/v1/users`,
-		method: "POST",
-		data: user,
-	};
-	return (await callExternalApi(config)) as IApiResponse;
-};
-
 export const updateUser = async (
-	id: string,
-	user: Partial<IUser>,
+  id: string,
+  user: Partial<IUser>
 ): Promise<IApiResponse> => {
-	const config: AxiosRequestConfig = {
-		url: `${baseUrl}/api/v1/users/${id}`,
-		method: "PUT",
-		data: user,
-	};
-	return (await callExternalApi(config)) as IApiResponse;
-};
-
-export const deleteUser = async (id: string): Promise<IApiResponse> => {
-	const config: AxiosRequestConfig = {
-		url: `${baseUrl}/api/v1/users/${id}`,
-		method: "DELETE",
-	};
-	return (await callExternalApi(config)) as IApiResponse;
+  const config: AxiosRequestConfig = {
+    url: `${baseUrl}/api/v1/users/${id}`,
+    method: "PUT",
+    data: user,
+  };
+  return (await callExternalApi(config)) as IApiResponse;
 };
