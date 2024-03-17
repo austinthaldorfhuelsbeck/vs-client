@@ -4,20 +4,19 @@ interface ITimestamps {
 }
 
 export interface IUser extends ITimestamps {
-	_id: string;
-	name: string;
-	email: string;
-	password?: string;
-	companyName: string;
-	img: string;
-	companyImg: string;
-	primaryColor: string;
-	secondaryColor: string;
-	tertiaryColor: string;
-	primaryFont: string;
-	secondaryFont: string;
-	galleries: Partial<IGallery>[];
-	social?: Partial<ISocial>;
+  _id: string;
+  name: string;
+  email: string;
+  companyName: string;
+  img: string;
+  companyImg: string;
+  primaryColor: string;
+  secondaryColor: string;
+  tertiaryColor: string;
+  primaryFont: string;
+  secondaryFont: string;
+  galleries: Partial<IGallery>[];
+  social?: Partial<ISocial>;
 }
 
 export interface IGallery extends ITimestamps {

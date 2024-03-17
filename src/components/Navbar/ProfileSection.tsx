@@ -8,40 +8,37 @@ import { Label, ListItem } from "../ContextMenu/ContextMenu.style";
 import { ProfileImg } from "./Navbar.style";
 
 interface Props {
-	toggleModal: (e: SyntheticEvent<HTMLOrSVGElement>) => void;
-	onLogout: () => void;
+  toggleModal: (e: SyntheticEvent<HTMLOrSVGElement>) => void;
 }
 
-const ProfileSection: React.FC<Props> = ({ toggleModal, onLogout }) => {
-	const { currentUser } = useUser();
-	const { setCurrentGallery } = useGallery();
+const ProfileSection: React.FC<Props> = ({ toggleModal }) => {
+  const { currentUser } = useUser();
+  const { setCurrentGallery } = useGallery();
 
-	const onUserEdit = (e: SyntheticEvent<HTMLLIElement>) => {
-		toggleModal(e);
-		setCurrentGallery(undefined);
-	};
+  const onUserEdit = (e: SyntheticEvent<HTMLLIElement>) => {
+    toggleModal(e);
+    setCurrentGallery(undefined);
+  };
 
-	return (
-		<>
-			<ContextMenu
-				button={
-					<ProfileImg src={currentUser?.img || userPlaceholderImg} />
-				}
-				content={
-					<>
-						<ListItem onClick={onUserEdit}>
-							<FontAwesomeIcon icon={faPencil} />
-							<Label>{currentUser?.name}</Label>
-						</ListItem>
-						<ListItem $danger onClick={onLogout}>
-							<FontAwesomeIcon icon={faSignOut} />
-							<Label>Log Out</Label>
-						</ListItem>
-					</>
-				}
-			/>
-		</>
-	);
+  return (
+    <>
+      <ContextMenu
+        button={<ProfileImg src={currentUser?.img || userPlaceholderImg} />}
+        content={
+          <>
+            <ListItem onClick={onUserEdit}>
+              <FontAwesomeIcon icon={faPencil} />
+              <Label>{currentUser?.name}</Label>
+            </ListItem>
+            <ListItem $danger>
+              <FontAwesomeIcon icon={faSignOut} />
+              <Label>Log Out</Label>
+            </ListItem>
+          </>
+        }
+      />
+    </>
+  );
 };
 
 export default ProfileSection;

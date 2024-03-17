@@ -1,9 +1,9 @@
 import {
-	faEllipsis,
-	faExpandAlt,
-	faPencil,
-	faTrash,
-	faX,
+  faEllipsis,
+  faExpandAlt,
+  faPencil,
+  faTrash,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent } from "react";
@@ -12,10 +12,10 @@ import { useVideo } from "../../context/contextProvider";
 import useModal from "../../hooks/useModal";
 import { IVideo } from "../../interfaces/models.interface";
 import {
-	Alert,
-	CloseButton,
-	Dialog,
-	InlineButton,
+  Alert,
+  CloseButton,
+  Dialog,
+  InlineButton,
 } from "../../styles/common/common.style";
 import { FormHeader, FormRow, FormSubheader } from "../../styles/forms.style";
 import ContextMenu from "../ContextMenu";

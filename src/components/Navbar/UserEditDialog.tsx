@@ -8,10 +8,10 @@ import useUserForm from "../../hooks/useUserForm";
 import { IUser } from "../../interfaces/models.interface";
 import { updateUser } from "../../middleware/user.api";
 import {
-	Alert,
-	CloseButton,
-	Dialog,
-	InlineButton,
+  Alert,
+  CloseButton,
+  Dialog,
+  InlineButton,
 } from "../../styles/common/common.style";
 import { Buttons, FormHeader, FormRow } from "../../styles/forms.style";
 import TextInput from "../InputGroups/TextInput";
